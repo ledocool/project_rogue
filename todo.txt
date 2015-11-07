@@ -1,4 +1,4 @@
 1. Console class for handling console messages and logging them later.
 2. Map class.
 3. Game logic class.
-4. Make dat bitch sdl load all type'o sound formats.
+4. Make sdl load all type of sound formats.
