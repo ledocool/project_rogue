@@ -13,7 +13,7 @@ map::map(uint w, uint h)
     generate(w,h);
 }
 
-void map::generate(uint w, uint h)
+void map::generate(uint w __attribute__((unused)), uint h __attribute__((unused)) )
 {
 //    for(uint i=0; i<h; i++)
 //    {

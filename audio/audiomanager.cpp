@@ -6,29 +6,29 @@ audioManager::audioManager()
 
 audioManager::~audioManager()
 {
-    for(uint i=0; i<sound_array.size(); i++)
-        delete sound_array[i];
-    for(uint i=0; i<music_array.size(); i++)
-        delete music_array[i];
+    for(uint i=0; i<_sound_array.size(); i++)
+        delete _sound_array[i];
+    for(uint i=0; i<_music_array.size(); i++)
+        delete _music_array[i];
 }
 
 bool audioManager::regSound(sound *snd)
 {
-    for(uint i=0; i<sound_array.size(); i++)
-        if(sound_array[i] == snd)
+    for(uint i=0; i<_sound_array.size(); i++)
+        if(_sound_array[i] == snd)
             return false;
 
-    sound_array.push_back(snd);
+    _sound_array.push_back(snd);
     return true;
 }
 
 bool audioManager::unregRound(sound *snd)
 {
-    for(uint i=0; i<sound_array.size(); i++)
-        if(sound_array[i] == snd)
+    for(uint i=0; i<_sound_array.size(); i++)
+        if(_sound_array[i] == snd)
         {
-            sound *s = sound_array[i];
-            sound_array.erase(sound_array.begin()+i);
+            sound *s = _sound_array[i];
+            _sound_array.erase(_sound_array.begin()+i);
             delete s;
 
             return true;
@@ -39,21 +39,21 @@ bool audioManager::unregRound(sound *snd)
 
 bool audioManager::regMusic(music *snd)
 {
-    for(uint i=0; i<music_array.size(); i++)
-        if(music_array[i] == snd)
+    for(uint i=0; i<_music_array.size(); i++)
+        if(_music_array[i] == snd)
             return false;
 
-    music_array.push_back(snd);
+    _music_array.push_back(snd);
     return true;
 }
 
 bool audioManager::unregMusic(music *snd)
 {
-    for(uint i=0; i<music_array.size(); i++)
-        if(music_array[i] == snd)
+    for(uint i=0; i<_music_array.size(); i++)
+        if(_music_array[i] == snd)
         {
-            music *s = music_array[i];
-            music_array.erase(music_array.begin()+i);
+            music *s = _music_array[i];
+            _music_array.erase(_music_array.begin()+i);
             delete s;
 
             return true;

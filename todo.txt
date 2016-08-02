@@ -1,4 +1,10 @@
 1. Console class for handling console messages and logging them later.
-2. Map class.
-3. Game logic class.
-4. Make sdl load all type of sound formats.
+2. Make debugging console
+3. Map class.
+4. Game logic class.
+
+Sound:
+    1. Make sdl load all type of sound formats.
+
+Input:
+    1. Make confings human-readable. (std::map container with <string, keystroke> pairs)

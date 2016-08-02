@@ -6,8 +6,13 @@
 class process
 {
 public:
-    process();
-    virtual ~process();
+    process()
+    {
+       _is_running = false;
+       _pid = -1;
+
+    }
+    virtual ~process(){}
 
     virtual void run () = 0;  //Asks process to startt;
     virtual void resume () = 0; //Asks process to continue
@@ -36,36 +41,6 @@ public:
     void resume () { printf ("Imma resuming game\n"); }
     void stop () { printf("Imma stopping game\n"); }
 
-};
-
-class drawProcess : public process
-{
-    graphicManager *gMan;
-
-    drawProcess() : process()
-    {
-       gMan = singleton <graphicManager>::get();
-    }
-
-    void run()
-    {
-        gMan->render();
-    }
-
-    void pause ()
-    {
-
-    }
-
-    void resume ()
-    {
-
-    }
-
-    void stop ()
-    {
-
-    }
 };
 
 #endif // PROCESS_H

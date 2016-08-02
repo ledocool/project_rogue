@@ -40,7 +40,7 @@ void audioMixer::free()
 
 void audioMixer::setChannels(int quantity)
 {
-    channelsNum = Mix_AllocateChannels(quantity);
+    _channelsNum = Mix_AllocateChannels(quantity);
 }
 
 void audioMixer::playSound(sound *s, int channel)
@@ -70,5 +70,5 @@ void audioMixer::playLoop(music *m)
 
 uint audioMixer::getChannelsQuantity()
 {
-    return channelsNum;
+    return _channelsNum;
 }

@@ -19,8 +19,8 @@ public:
     bool unregMusic(music *snd);
 
 private:
-    std::vector <sound *> sound_array;
-    std::vector <music *> music_array;
+    std::vector <sound *> _sound_array;
+    std::vector <music *> _music_array;
 };
 
 #endif // AUDIOMANAGER_H

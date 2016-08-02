@@ -15,8 +15,15 @@ INCLUDEPATH += C:/Qt/Library/Frameworks/SDL2_image-2.0.0/include
 #SDL_mixer
 LIBS += -LC:/Qt/Library/Frameworks/SDL2_mixer-2.0.0/lib/x86 -lSDL2_mixer
 INCLUDEPATH += C:/Qt/Library/Frameworks/SDL2_mixer-2.0.0/include
+#libconfig
+LIBS += -LC:/Qt/Library/Frameworks/libconfig/bin -llibconfig
+INCLUDEPATH += C:/Qt/Library/Frameworks/libconfig/include
 
-#PRE_TARGETDEPS +=
+#cpdata.commands = $(COPY_DIR) $$PWD/resources $$OUT_PWD
+#first.depends = $(first) cpdata
+#export(first.depends)
+#export(copydata.commands)
+#QMAKE_EXTRA_TARGETS += first cpdata
 
 PRECOMPILED_HEADER = stdafx.h
 
@@ -25,7 +32,6 @@ SOURCES += main.cpp \
     core/stateManager/state.cpp \
     core/stateManager/statemanager.cpp \
     core/processManager/processmanager.cpp \
-    core/processManager/process.cpp \
     input/inputmanager.cpp \
     graphics/graphicmanager.cpp \
     graphics/renderGL.cpp \
@@ -39,7 +45,11 @@ SOURCES += main.cpp \
     game/logic.cpp \
     game/map.cpp \
     game/tile.cpp \
-    core/console.cpp
+    core/console.cpp \
+    core/processManager/processes/drawprocess.cpp \
+    core/processManager/processes/keyboardenquiryprocess.cpp \
+    input/controlmappingsmanager.cpp \
+    input/keycombination.cpp
 
 HEADERS += \
     core/appcore.h \
@@ -62,8 +72,17 @@ HEADERS += \
     game/logic.h \
     game/map.h \
     game/tile.h \
-    core/console.h
+    core/console.h \
+    core/processManager/event.h \
+    core/processManager/processes/drawprocess.h \
+    core/processManager/processes/keyboardenquiryprocess.h \
+    input/controlmappingsmanager.h \
+    input/keycombination.h
 
 OTHER_FILES += \
     todo.txt
 
+DISTFILES += \
+    README \
+    resources/config.ini \
+    resources/graphics.ini

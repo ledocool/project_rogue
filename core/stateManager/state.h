@@ -13,10 +13,6 @@ public:
     virtual void resume () = 0;
     virtual void exit () = 0;
 
-//    virtual void frameClicked () = 0;
-//    virtual void keyIsDown () = 0;
-//    virtual void keyIsUp () = 0;
-
     state();
     virtual ~state();
 };

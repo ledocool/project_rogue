@@ -1,0 +1,4 @@
+This is a SDL2/OpenGL project;
+
+Libraries used:
+sdl2, sdl_image, sdl_mixer, opengl, glu, glaux;

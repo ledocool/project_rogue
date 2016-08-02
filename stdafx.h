@@ -18,6 +18,9 @@ typedef unsigned char uchar;
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
+//libconfig
+#include <libconfig.h>
+
 //OpenGL
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -50,6 +53,7 @@ typedef unsigned char uchar;
 #include "graphics/spritemanager.h"
 
 #include "input/inputmanager.h"
+#include "input/controlmappingsmanager.h"
 #include "core/processManager/processmanager.h"
 #include "core/stateManager/statemanager.h"
 

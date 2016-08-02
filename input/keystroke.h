@@ -5,7 +5,10 @@
  * Just set whole keyboard here
  */
 
-typedef enum
+namespace keys
+{
+
+enum keystroke
 {
     KEY_UNKNOWN		= SDLK_UNKNOWN,
     //KEY_FIRST		= SDLK_FIRST,
@@ -156,15 +159,25 @@ typedef enum
 //    KEY_BREAK		= SDLK_BREAK,
     KEY_MENU		= SDLK_MENU,
 
-} keystroke;
+};
 
-typedef enum
+enum mouseClick
 {
     MOUSE_LEFT      = SDL_BUTTON_LEFT,
     MOUSE_RIGHT     = SDL_BUTTON_RIGHT,
-    MOUSE_MIDDLE    = SDL_BUTTON_MIDDLE,
-    MOUSE_SCROLLUP,
-    MOUSE_SCROLLDOWN
-} mouseClicks;
+    MOUSE_MIDDLE    = SDL_BUTTON_MIDDLE
+};
+
+enum playerAction
+{
+    GO_UP,
+    GO_DOWN,
+    GO_LEFT,
+    GO_RIGHT,
+    ZOOM_IN,
+    ZOOM_OUT
+};
+
+}
 
 #endif // KEYSTROKE_H

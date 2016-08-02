@@ -22,7 +22,7 @@ bool sound::load(const char *filepath)
     if(chunk == NULL)
         return false;
 
-    singleton <audioManager>::get()->regSound(this);
+    //singleton <audioManager>::get()->regSound(this);
     return true;
 }
 

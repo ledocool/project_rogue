@@ -1,11 +1,9 @@
 #include "core/appcore.h"
 
-int main(int argc, char **argv)
+int main(int argc __attribute__((unused)) , char **argv __attribute__((unused)) )
 {
     appCore app;
-    app.init();
     app.start();
-    app.finish();
 
     return 0;
 }

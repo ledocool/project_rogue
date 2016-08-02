@@ -39,7 +39,7 @@ bool inputManager::keyIsToggled(keystroke keyNum)
         return false;
 }
 
-bool inputManager::mouseDown(mouseClicks mouseKeyNum)
+bool inputManager::mouseDown(mouseClick mouseKeyNum)
 {
     if(mouseStates[mouseKeyNum] == KEY_IS_DOWN)
         return true;
@@ -53,7 +53,7 @@ bool inputManager::updateState()
 
     SDL_Event event;
     std::vector < keystroke > keys;
-    std::vector < mouseClicks > clicks;
+    std::vector < mouseClick > clicks;
     //std::vector <  >
 
     while ( SDL_PollEvent( &event ) )
@@ -77,11 +77,11 @@ bool inputManager::updateState()
                 break;
             case SDL_MOUSEBUTTONUP:
                 mouseStates[event.button.button] = KEY_IS_UP;
-                clicks.push_back((mouseClicks)event.button.which);
+                clicks.push_back((mouseClick)event.button.which);
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 mouseStates[event.button.button] = KEY_IS_DOWN;
-                clicks.push_back((mouseClicks)event.button.which);
+                clicks.push_back((mouseClick)event.button.which);
                 break;
 
             case SDL_WINDOWEVENT:

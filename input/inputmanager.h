@@ -13,17 +13,17 @@
 
 //! Note: more states can be added
 
-class inputManager// : public singleton <inputManager>
+class inputManager
 {
 public:
     inputManager ();
 
-    bool keyIsUp (keystroke keyNum);
-    bool keyIsDown (keystroke keyNum);
-    bool keyIsHeld (keystroke keyNum);
-    bool keyIsToggled (keystroke keyNum);
+    bool keyIsUp (keys::keystroke keyNum);
+    bool keyIsDown (keys::keystroke keyNum);
+    bool keyIsHeld (keys::keystroke keyNum);
+    bool keyIsToggled (keys::keystroke keyNum);
 
-    bool mouseDown (mouseClicks mouseKeyNum);
+    bool mouseDown (keys::mouseClick mouseKeyNum);
 
     bool updateState();
 

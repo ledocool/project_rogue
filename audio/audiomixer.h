@@ -20,7 +20,7 @@ public:
     uint getChannelsQuantity();
 
 private:
-    uint channelsNum; //Number of mixing channels
+    uint _channelsNum; //Number of mixing channels
 
 };
 

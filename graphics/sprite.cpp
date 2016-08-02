@@ -10,7 +10,8 @@ sprite::sprite()
 
 sprite::sprite(const char *filename)
 {
-    load(filename);
+    if(load(filename) == false)
+        throw SDL_GetError();
 }
 
 sprite::~sprite()
@@ -38,8 +39,6 @@ bool sprite::load(const char *filename)
     glGenTextures(1, &texture); //gen tex id
     glBindTexture(GL_TEXTURE_2D, texture);
 
-    //glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
@@ -54,7 +53,7 @@ bool sprite::load(const char *filename)
     SDL_FreeSurface(surf);
     IMG_Quit();
 
-    singleton<spriteManager>::get()->regSprite(this);
+    //singleton<spriteManager>::get()->regSprite(this);
     return true;
 }
 

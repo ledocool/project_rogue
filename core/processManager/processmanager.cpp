@@ -20,7 +20,7 @@ int processManager::pushProc(process *p)
     return p->getPid();
 }
 
-bool processManager::popProc(unsigned int id, process *p)
+bool processManager::popProc(unsigned int id, process *p __attribute__ ((unused)) )
 {
     for(unsigned int i=0; i<processQueue.size(); i++)
     {

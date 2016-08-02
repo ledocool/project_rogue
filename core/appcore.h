@@ -6,18 +6,21 @@
 class appCore
 {
 public:
-    void init();   //Asks all subsystems to init themselves
     void start();  //Starts the game and sets it for running
-    void finish(); //Stops program from running
-
+    int registerSprite(const char *spritePath);
+    int registerSound(const char *soundPath);
     appCore();
+    ~appCore();
 
 private:
-//    createProcess();
+    int loop();
+    void init();   //Asks all subsystems to init themselves
+    void finish(); //Stops program from running
 
     stateManager *stateMan;
     processManager *processMan;
     inputManager *inputMan;
+    controlMappingsManager *mappMan;
 
     graphicManager *graphicMan;
     spriteManager *spriteMan;
