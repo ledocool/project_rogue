@@ -13,7 +13,7 @@ public:
 
 private:
     std::vector<keyCombination> _keyCombinations;
-    std::string _inputfile;
+    //std::string _inputfile;
 };
 
 #endif // CONTROLMAPPINGSMANAGER_H

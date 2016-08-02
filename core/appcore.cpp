@@ -20,8 +20,31 @@ void appCore::init()
     }
 
     //Inits video subsystem, which inits window
-    graphicMan->init("Imma window", 30, 30, 480, 640); //init grafonium subsystem
+
+    int w, h, px, py;
+    bool ok;
+
+    config_t *cfg;
+    config_init(cfg);
+    int cfg_read = config_read_file(cfg, "config.ini");
+
+    ok = config_lookup_int(cfg, "window_propreties.width", &w);
+    ok = config_lookup_int(cfg, "window_propreties.height", &h);
+    ok = config_lookup_int(cfg, "window_properties.window_x", &px);
+    ok = config_lookup_int(cfg, "window_propreties.window_y", &py);
+
+    config_destroy(cfg);
+
+    if(px < 0 || py < 0)
+    {
+        px = SDL_WINDOWPOS_UNDEFINED;
+        py = SDL_WINDOWPOS_UNDEFINED;
+    }
+
+    graphicMan->init("Game engine", px, py, h, w); //init grafonium subsystem
     audioMix->init(); //init sound subsystem
+
+    cameraMan->set(w/2., h/2.);
 }
 
 void appCore::start()

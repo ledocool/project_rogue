@@ -84,5 +84,4 @@ OTHER_FILES += \
 
 DISTFILES += \
     README \
-    resources/config.ini \
-    resources/graphics.ini
+    resources/config.ini

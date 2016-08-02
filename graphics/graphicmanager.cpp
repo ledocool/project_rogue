@@ -13,7 +13,9 @@ bool graphicManager::init(const char *title, unsigned int x, unsigned int y, uns
     }
 
     if(makeWindow(title, x, y, height, width) == false)
+    {
         return false;
+    }
     initGL(height, width);
 
     cameraMan = singleton <camera> ::get(); //Getting camera;

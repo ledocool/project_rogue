@@ -2,14 +2,12 @@
 
 controlMappingsManager::controlMappingsManager()
 {
-    using namespace keys;
-    _inputfile = "config.ini";
-
+    using namespace keys;    
     config_t *cfg;
-
     config_init(cfg);
-    int cfg_read = config_read_file(cfg, _inputfile.c_str());
+    int cfg_read = config_read_file(cfg, "config.ini");
     int a;
+
     config_lookup_int(cfg, "basic_controls.GO_UP", &a);
     _keyCombinations.push_back( keyCombination(GO_UP, (keystroke)a) );
     config_lookup_int(cfg, "basic_controls.GO_DOWN", &a);
@@ -22,7 +20,6 @@ controlMappingsManager::controlMappingsManager()
     _keyCombinations.push_back( keyCombination(ZOOM_IN, (keystroke)a) );
     config_lookup_int(cfg, "basic_controls.ZOOM_OUT", &a);
     _keyCombinations.push_back( keyCombination(ZOOM_OUT, (keystroke)a) );
-
 
     config_destroy(cfg);
 }
