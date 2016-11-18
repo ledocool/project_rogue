@@ -1,17 +1,17 @@
 #include "spritemanager.h"
 
-spriteManager::spriteManager()
+SpriteManager::SpriteManager()
 {
 
 }
 
-spriteManager::~spriteManager()
+SpriteManager::~SpriteManager()
 {
     for(uint i=0; i<sprite_array.size(); i++)
         delete sprite_array[i];
 }
 
-bool spriteManager::regSprite(sprite *spt)
+bool SpriteManager::regSprite(sprite *spt)
 {
     for(uint i=0; i<sprite_array.size(); i++)
         if(sprite_array[i] == spt)
@@ -21,7 +21,7 @@ bool spriteManager::regSprite(sprite *spt)
     return true;
 }
 
-bool spriteManager::unregSprite(sprite *spt)
+bool SpriteManager::unregSprite(sprite *spt)
 {
     for(uint i=0; i<sprite_array.size(); i++)
         if(sprite_array[i] == spt)
@@ -36,7 +36,7 @@ bool spriteManager::unregSprite(sprite *spt)
     return false;
 }
 
-sprite *spriteManager::getspriteByNumber(uint i)
+sprite *SpriteManager::getspriteByNumber(uint i)
 {
     if(i>=sprite_array.size())
         return NULL;

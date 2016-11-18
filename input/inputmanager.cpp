@@ -1,13 +1,13 @@
 #include "inputmanager.h"
 
-inputManager::inputManager()
+InputManager::InputManager()
 {
     //maxKeys = 255; //No, srsly, can't be more;
     //keyStates.resize(256);
     mouseStates.resize(5);
 }
 
-bool inputManager::keyIsUp(keystroke keyNum)
+bool InputManager::keyIsUp(keystroke keyNum)
 {
     if (keyStates[keyNum] == KEY_IS_UP)
         return true;
@@ -15,7 +15,7 @@ bool inputManager::keyIsUp(keystroke keyNum)
         return false;
 }
 
-bool inputManager::keyIsDown(keystroke keyNum)
+bool InputManager::keyIsDown(keystroke keyNum)
 {
     if (keyStates[keyNum] == KEY_IS_DOWN)
         return true;
@@ -23,7 +23,7 @@ bool inputManager::keyIsDown(keystroke keyNum)
         return false;
 }
 
-bool inputManager::keyIsHeld(keystroke keyNum)
+bool InputManager::keyIsHeld(keystroke keyNum)
 {
     if (keyStates[keyNum] == KEY_IS_HELD)
         return true;
@@ -31,7 +31,7 @@ bool inputManager::keyIsHeld(keystroke keyNum)
         return false;
 }
 
-bool inputManager::keyIsToggled(keystroke keyNum)
+bool InputManager::keyIsToggled(keystroke keyNum)
 {
     if (keyStates[keyNum] == KEY_IS_TOGGLED)
         return true;
@@ -39,7 +39,7 @@ bool inputManager::keyIsToggled(keystroke keyNum)
         return false;
 }
 
-bool inputManager::mouseDown(mouseClick mouseKeyNum)
+bool InputManager::mouseDown(mouseClick mouseKeyNum)
 {
     if(mouseStates[mouseKeyNum] == KEY_IS_DOWN)
         return true;
@@ -47,9 +47,9 @@ bool inputManager::mouseDown(mouseClick mouseKeyNum)
         return false;
 }
 
-bool inputManager::updateState()
+bool InputManager::updateState()
 {
-    graphicManager *graphic = singleton <graphicManager> ::get();
+    GraphicManager *graphic = Singleton <GraphicManager> ::get();
 
     SDL_Event event;
     std::vector < keystroke > keys;

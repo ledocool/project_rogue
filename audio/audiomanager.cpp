@@ -1,10 +1,10 @@
 #include "audiomanager.h"
 
-audioManager::audioManager()
+AudioManager::AudioManager()
 {
 }
 
-audioManager::~audioManager()
+AudioManager::~AudioManager()
 {
     for(uint i=0; i<_sound_array.size(); i++)
         delete _sound_array[i];
@@ -12,7 +12,7 @@ audioManager::~audioManager()
         delete _music_array[i];
 }
 
-bool audioManager::regSound(sound *snd)
+bool AudioManager::regSound(sound *snd)
 {
     for(uint i=0; i<_sound_array.size(); i++)
         if(_sound_array[i] == snd)
@@ -22,7 +22,7 @@ bool audioManager::regSound(sound *snd)
     return true;
 }
 
-bool audioManager::unregRound(sound *snd)
+bool AudioManager::unregRound(sound *snd)
 {
     for(uint i=0; i<_sound_array.size(); i++)
         if(_sound_array[i] == snd)
@@ -37,7 +37,7 @@ bool audioManager::unregRound(sound *snd)
     return false;
 }
 
-bool audioManager::regMusic(music *snd)
+bool AudioManager::regMusic(music *snd)
 {
     for(uint i=0; i<_music_array.size(); i++)
         if(_music_array[i] == snd)
@@ -47,7 +47,7 @@ bool audioManager::regMusic(music *snd)
     return true;
 }
 
-bool audioManager::unregMusic(music *snd)
+bool AudioManager::unregMusic(music *snd)
 {
     for(uint i=0; i<_music_array.size(); i++)
         if(_music_array[i] == snd)

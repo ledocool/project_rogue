@@ -13,10 +13,10 @@
 
 //! Note: more states can be added
 
-class inputManager
+class InputManager
 {
 public:
-    inputManager ();
+    InputManager ();
 
     bool keyIsUp (keys::keystroke keyNum);
     bool keyIsDown (keys::keystroke keyNum);

@@ -3,18 +3,18 @@
 #include "core/processManager/process.h"
 #include "stdafx.h"
 
-class drawProcess : public process
+class drawProcess : public Process
 {
-    graphicManager *gMan;
+    GraphicManager *gMan;
 
-    drawProcess() : process()
+    drawProcess() : Process()
     {
-       gMan = singleton <graphicManager>::get();
+       gMan = Singleton <GraphicManager>::get();
     }
 
     void run()
     {
-        gMan->render();
+        //gMan->render();
     }
 
     void pause ()

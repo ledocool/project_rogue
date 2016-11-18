@@ -3,13 +3,13 @@
 #include "core/processManager/process.h"
 #include "stdafx.h"
 
-class keyboardEnquiryProcess : public process
+class keyboardEnquiryProcess : public Process
 {
-    inputManager *iMan;
+    InputManager *iMan;
 
-    keyboardEnquiryProcess() : process()
+    keyboardEnquiryProcess() : Process()
     {
-        iMan = singleton <inputManager>::get();
+        iMan = Singleton <InputManager>::get();
     }
 
     void run()

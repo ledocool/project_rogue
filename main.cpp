@@ -2,9 +2,17 @@
 
 int main(int argc __attribute__((unused)) , char **argv __attribute__((unused)) )
 {
-    appCore app;
-    app.start();
+    try
+    {
+        AppCore app;
+        app.start();
 
-    return 0;
+        return 0;
+    }
+    catch(Exception e)
+    {
+        //TODO: log exception message;
+        return e.getErrorCode();
+    }
 }
 

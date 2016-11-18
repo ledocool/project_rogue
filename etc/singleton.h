@@ -1,11 +1,11 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-template <typename T> class singleton
+template <typename T> class Singleton
 {
 public:
-    singleton();
-    virtual ~singleton();
+    Singleton();
+    virtual ~Singleton();
 
     static T* get()
     {
@@ -15,8 +15,8 @@ public:
 
 private:
 
-    singleton(singleton const&);
-    singleton& operator=(singleton const&);
+    Singleton(Singleton const&);
+    Singleton& operator=(Singleton const&);
 
 };
 

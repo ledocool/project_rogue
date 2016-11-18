@@ -26,6 +26,9 @@ typedef unsigned char uchar;
 #include <GL/glu.h>
 #include <GL/glaux.h>
 
+//ftgl
+#include <FTGL/ftgl.h>
+
 //For computation
 #include <queue>
 #include <stack>
@@ -56,5 +59,6 @@ typedef unsigned char uchar;
 #include "input/controlmappingsmanager.h"
 #include "core/processManager/processmanager.h"
 #include "core/stateManager/statemanager.h"
+#include "core/exception.h"
 
 #endif // STDAFX_H

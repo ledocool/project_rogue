@@ -1,81 +1,19 @@
 #include "state.h"
 
-state::state()
+State::State()
 {
-
+    stateMan = Singleton <StateManager> ::get();
+    processMan = Singleton <ProcessManager> ::get();
+    inputMan = Singleton <InputManager> ::get();
+    graphicMan = Singleton <GraphicManager> ::get();
+    spriteMan = Singleton <SpriteManager> ::get();
+    cameraMan = Singleton <Camera> ::get();
+    audioMix = Singleton <AudioMixer> ::get();
+    audioMan = Singleton <AudioManager> ::get();
+    mappMan = Singleton <controlMappingsManager> ::get();
 }
 
-state::~state()
+State::~State()
 {
 
-}
-
-gameState::gameState()
-{
-
-}
-
-gameState::~gameState()
-{
-
-}
-
-void gameState::render()
-{
-    printf ("Imma rendering gamestate\n");
-}
-
-void gameState::enter()
-{
-    printf ("Imma entering gamestate\n");
-}
-
-void gameState::pause()
-{
-    printf ("Imma pausing gamestate\n");
-}
-
-void gameState::resume()
-{
-    printf ("Imma resuming gamestate\n");
-}
-
-void gameState::exit()
-{
-    printf ("Imma exiting gamestate\n");
-}
-
-menuState::menuState()
-{
-
-}
-
-menuState::~menuState()
-{
-
-}
-
-void menuState::render()
-{
-    printf ("Imma rendering memu\n");
-}
-
-void menuState::enter()
-{
-    printf ("Imma entering memu\n");
-}
-
-void menuState::pause()
-{
-    printf ("Imma pausing memu\n");
-}
-
-void menuState::resume()
-{
-    printf ("Imma resuming memu\n");
-}
-
-void menuState::exit()
-{
-    printf ("Imma exiting memu\n");
 }

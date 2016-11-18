@@ -3,10 +3,10 @@
 
 #include "stdafx.h"
 
-class audioMixer
+class AudioMixer
 {
 public:
-    audioMixer();
+    AudioMixer();
     bool init();
     void free();
 

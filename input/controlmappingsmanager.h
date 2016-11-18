@@ -9,7 +9,7 @@ class controlMappingsManager
 {
 public:
     controlMappingsManager();
-    std::vector <playerAction> getActions(inputManager *inputMan);
+    std::vector <playerAction> getActions(InputManager *inputMan);
 
 private:
     std::vector<keyCombination> _keyCombinations;

@@ -1,6 +1,6 @@
 #include "camera.h"
 
-camera::camera()
+Camera::Camera()
 {
     _x = _y = 0.;
     _zoom = 1;
@@ -8,47 +8,47 @@ camera::camera()
     _zoomMax = 1.5;
 }
 
-void camera::set(float x, float y)
+void Camera::set(float x, float y)
 {
     _x = x;
     _y = y;
 }
 
-void camera::move(float x, float y)
+void Camera::move(float x, float y)
 {
     _x += x;
     _y += y;
 }
 
-float camera::getX()
+float Camera::getX()
 {
     return _x;
 }
 
-float camera::getY()
+float Camera::getY()
 {
     return _y;
 }
 
-void camera::getXY(float *x, float *y)
+void Camera::getXY(float *x, float *y)
 {
     *x = _x;
     *y = _y;
 }
 
-void camera::setZoomRange(float min, float max)
+void Camera::setZoomRange(float min, float max)
 {
     _zoomMin = min;
     _zoomMax = max;
 }
 
-void camera::setZoom(float zoom)
+void Camera::setZoom(float zoom)
 {
     if(zoom > _zoomMin && zoom < _zoomMax)
     _zoom = zoom;
 }
 
-float camera::getZoom()
+float Camera::getZoom()
 {
     return _zoom;
 }

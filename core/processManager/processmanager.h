@@ -4,19 +4,19 @@
 #include "stdafx.h"
 #include "core/processManager/process.h"
 
-class processManager// : public singleton <processManager>
+class ProcessManager
 {
 public:
-    processManager();
-    ~processManager();
+    ProcessManager();
+    ~ProcessManager();
 
-    int pushProc ( process *p ); //Adds another process to the end
-    bool popProc (unsigned int id, process *p); //Kill process by its and returns link to process through *p;
+    int pushProc ( Process *p ); //Adds another process to the end
+    bool popProc (unsigned int id, Process *p); //Kill process by its and returns link to process through *p;
     void popAll ();
     bool run();
 
 private:
-    std::vector <process *> processQueue;
+    std::vector <Process *> processQueue;
     unsigned int procLimit;
 
 };

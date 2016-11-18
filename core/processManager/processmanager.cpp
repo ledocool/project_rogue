@@ -1,16 +1,16 @@
 #include "processmanager.h"
 
-processManager::processManager()
+ProcessManager::ProcessManager()
 {
     procLimit = 100;
 }
 
-processManager::~processManager()
+ProcessManager::~ProcessManager()
 {
     popAll();
 }
 
-int processManager::pushProc(process *p)
+int ProcessManager::pushProc(Process *p)
 {
     if( processQueue.size() >= procLimit )
         return -1; //Means epic failure;
@@ -20,7 +20,7 @@ int processManager::pushProc(process *p)
     return p->getPid();
 }
 
-bool processManager::popProc(unsigned int id, process *p __attribute__ ((unused)) )
+bool ProcessManager::popProc(unsigned int id, Process *p __attribute__ ((unused)) )
 {
     for(unsigned int i=0; i<processQueue.size(); i++)
     {
@@ -34,9 +34,9 @@ bool processManager::popProc(unsigned int id, process *p __attribute__ ((unused)
     return false; //no pid found
 }
 
-void processManager::popAll()
+void ProcessManager::popAll()
 {
-    process *p;
+    Process *p;
     for(int i = processQueue.size()-1; i>=0; i--)
     {
         processQueue.back()->stop();
@@ -46,7 +46,7 @@ void processManager::popAll()
     }
 }
 
-bool processManager::run()
+bool ProcessManager::run()
 {
     if( processQueue.empty() )
         return false; //No process to run;

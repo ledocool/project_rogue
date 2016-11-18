@@ -4,11 +4,11 @@
 #include "stdafx.h"
 #include "graphics/sprite.h"
 
-class spriteManager// : public singleton <spriteManager>
+class SpriteManager// : public singleton <spriteManager>
 {
 public:
-    spriteManager();
-    ~spriteManager();
+    SpriteManager();
+    ~SpriteManager();
 
     bool regSprite(sprite *spt);
     bool unregSprite(sprite *spt);

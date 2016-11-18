@@ -168,6 +168,7 @@ enum mouseClick
     MOUSE_MIDDLE    = SDL_BUTTON_MIDDLE
 };
 
+
 enum playerAction
 {
     GO_UP,
@@ -175,7 +176,8 @@ enum playerAction
     GO_LEFT,
     GO_RIGHT,
     ZOOM_IN,
-    ZOOM_OUT
+    ZOOM_OUT,
+    CHANGE_STATE
 };
 
 }

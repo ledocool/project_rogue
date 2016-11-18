@@ -3,19 +3,20 @@
 
 #include "stdafx.h"
 #include "core/stateManager/state.h"
+#include "state.h"
 
-class stateManager// : public singleton <stateManager>
+class StateManager
 {
 public:
-    void render();
-    void changeState( state *st );
-    void pushState( state* st );
+    bool render();
+    void changeState( State *st );
+    void pushState( State* st );
     void popState();
-
-    stateManager();
+    StateManager();
 
 private:
-    std::stack <state *> stateStack; //currentState;
+    std::stack <State *> stateStack; //currentState;
+
 
 };
 

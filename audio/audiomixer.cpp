@@ -1,10 +1,10 @@
 #include "audiomixer.h"
 
-audioMixer::audioMixer()
+AudioMixer::AudioMixer()
 {
 }
 
-bool audioMixer::init()
+bool AudioMixer::init()
 {
     if(SDL_InitSubSystem( SDL_INIT_AUDIO ))
     {
@@ -31,44 +31,44 @@ bool audioMixer::init()
     return true;
 }
 
-void audioMixer::free()
+void AudioMixer::free()
 {
     Mix_CloseAudio();
     Mix_Quit();
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
-void audioMixer::setChannels(int quantity)
+void AudioMixer::setChannels(int quantity)
 {
     _channelsNum = Mix_AllocateChannels(quantity);
 }
 
-void audioMixer::playSound(sound *s, int channel)
+void AudioMixer::playSound(sound *s, int channel)
 {
     if( Mix_PlayChannel(channel, s->getSound(), 0) == -1 )
         std::cout << "Unable to play sound: " << SDL_GetError() << std::endl;
 }
 
-void audioMixer::playLoop(sound *s, int channel)
+void AudioMixer::playLoop(sound *s, int channel)
 {
     if( Mix_PlayChannel(channel, s->getSound(), -1) == -1 )
         std::cout << "Unable to play sound: " << SDL_GetError() << std::endl;
 }
 
-void audioMixer::playMusic(music *m)
+void AudioMixer::playMusic(music *m)
 {
     if( Mix_PlayMusic(m->getMusic(), 0) == -1)
         std::cout << "Unable to play music" << SDL_GetError() << std::endl;
 
 }
 
-void audioMixer::playLoop(music *m)
+void AudioMixer::playLoop(music *m)
 {
     if( Mix_PlayMusic(m->getMusic(), -1) == -1)
         std::cout << "Unable to play music" << SDL_GetError() << std::endl;
 }
 
-uint audioMixer::getChannelsQuantity()
+uint AudioMixer::getChannelsQuantity()
 {
     return _channelsNum;
 }

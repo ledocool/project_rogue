@@ -1,10 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-class camera
+class Camera
 {
 public:
-    camera();
+    Camera();
 
     void set(float x, float y);
     void move(float x, float y);

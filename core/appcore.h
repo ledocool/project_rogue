@@ -2,33 +2,33 @@
 #define APPCORE_H
 
 #include "stdafx.h"
+#include "stateManager/menustate.h"
+#include "stateManager/gamestate.h"
 
-class appCore
+class AppCore
 {
 public:
-    void start();  //Starts the game and sets it for running
-    int registerSprite(const char *spritePath);
-    int registerSound(const char *soundPath);
-    appCore();
-    ~appCore();
+    void start(); //Starts the game and sets it for running
+    AppCore();
+    ~AppCore();
 
 private:
     int loop();
     void init();   //Asks all subsystems to init themselves
     void finish(); //Stops program from running
 
-    stateManager *stateMan;
-    processManager *processMan;
-    inputManager *inputMan;
+    StateManager *stateMan;
+    ProcessManager *processMan;
+    InputManager *inputMan;
     controlMappingsManager *mappMan;
 
-    graphicManager *graphicMan;
-    spriteManager *spriteMan;
+    GraphicManager *graphicMan;
+    SpriteManager *spriteMan;
 
-    audioMixer *audioMix;
-    audioManager *audioMan;
+    AudioMixer *audioMix;
+    AudioManager *audioMan;
 
-    camera *cameraMan;
+    Camera *cameraMan;
 
 };
 

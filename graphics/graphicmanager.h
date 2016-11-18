@@ -6,17 +6,21 @@
 
 #include "etc/camera.h"
 
-class graphicManager// : singleton <graphicManager>
+class GraphicManager// : singleton <graphicManager>
 {
 public:
-    graphicManager();
+    GraphicManager();
 
     //Basic macro functions
     bool init(const char *title = "Default window",
               unsigned int x = 0, unsigned int y = 0,
               unsigned int height = 640, unsigned int width = 480);
-    void render(); // works on rendring all that shit
     void freeAll();
+
+    void resetMatrix();
+
+    void moveTo(GLfloat x, GLfloat y);
+    void scaleViewport(GLfloat xscale, GLfloat yscale);
 
     //Window size workers
     void getSize(int *w, int *h);
@@ -32,12 +36,14 @@ public:
     void drawSprite(sprite *sp, GLfloat x, GLfloat y,
                     GLfloat scale, GLfloat rotation);
 
+    void drawText(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd, std::string text);
+
     void swapBuffers();
     void clear();
 
 protected:
     //Buffer swap
-
+    //void readyfont();
 private:
     //window micro
     bool makeWindow(const char *title, unsigned int x, unsigned int y, unsigned int height, unsigned int width);
@@ -51,11 +57,9 @@ private:
     void initGL(unsigned int h, unsigned int w);
     void freeGL();
 
-    camera *cameraMan;
-
     SDL_Window *mainWindow;
     SDL_GLContext glcontext;
-    GLuint currentSprite;
+    GLuint currentSprite, font;
 };
 
 #endif // GRAPHICMANAGER_H

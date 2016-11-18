@@ -1,17 +1,22 @@
 #include "statemanager.h"
 
-stateManager::stateManager()
+StateManager::StateManager()
 {
 }
 
-void stateManager::render()
+bool StateManager::render()
 {
+    if(stateStack.empty())
+    {
+        return false;
+    }
     stateStack.top()->render();
+    return true;
 }
 
-void stateManager::changeState(state *st)
+void StateManager::changeState(State *st)
 {
-    class state *delState;
+    class State *delState;
     if( !stateStack.empty() )
     {
         stateStack.top()->exit(); //pause current runlevel
@@ -24,7 +29,7 @@ void stateManager::changeState(state *st)
     stateStack.top()->enter();
 }
 
-void stateManager::pushState(state *st)
+void StateManager::pushState(State *st)
 {
     if( !stateStack.empty() )
         stateStack.top()->pause(); //pause current runlevel
@@ -34,9 +39,9 @@ void stateManager::pushState(state *st)
     stateStack.top()->enter();
 }
 
-void stateManager::popState()
+void StateManager::popState()
 {
-    state *st;
+    State *st;
     if( !stateStack.empty() )
     {
         stateStack.top()->exit(); //pause current runlevel

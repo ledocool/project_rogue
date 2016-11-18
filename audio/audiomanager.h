@@ -6,11 +6,11 @@
 class sound;
 class music;
 
-class audioManager
+class AudioManager
 {
 public:
-    audioManager();
-    ~audioManager();
+    AudioManager();
+    ~AudioManager();
 
     bool regSound(sound *snd);
     bool unregRound(sound *snd);

@@ -7,23 +7,28 @@ CONFIG += qt
 QT += opengl
 
 #SDL
-LIBS += -LC:/Qt/Library/Frameworks/SDL2-2.0.3/lib/x86 -lSDL2main -lSDL2
-INCLUDEPATH += C:/Qt/Library/Frameworks/SDL2-2.0.3/include
+LIBS += -LC:/Library/Frameworks/SDL2-2.0.3/lib/x86 -lSDL2main -lSDL2
+INCLUDEPATH += C:/Library/Frameworks/SDL2-2.0.3/include
 #SDL_image
-LIBS += -LC:/Qt/Library/Frameworks/SDL2_image-2.0.0/lib/x86 -lSDL2_image
-INCLUDEPATH += C:/Qt/Library/Frameworks/SDL2_image-2.0.0/include
+LIBS += -LC:/Library/Frameworks/SDL2_image-2.0.0/lib/x86 -lSDL2_image
+INCLUDEPATH += C:/Library/Frameworks/SDL2_image-2.0.0/include
 #SDL_mixer
-LIBS += -LC:/Qt/Library/Frameworks/SDL2_mixer-2.0.0/lib/x86 -lSDL2_mixer
-INCLUDEPATH += C:/Qt/Library/Frameworks/SDL2_mixer-2.0.0/include
-#libconfig
-LIBS += -LC:/Qt/Library/Frameworks/libconfig/bin -llibconfig
-INCLUDEPATH += C:/Qt/Library/Frameworks/libconfig/include
+LIBS += -LC:/Library/Frameworks/SDL2_mixer-2.0.0/lib/x86 -lSDL2_mixer
+INCLUDEPATH += C:/Library/Frameworks/SDL2_mixer-2.0.0/include
+#SDL2 ttf
+LIBS += -LC:/Library/Frameworks/SDL2_ttf-2.0.14/lib/x86 -lSDL2_ttf
+INCLUDEPATH += C:/Library/Frameworks/SDL2_ttf-2.0.14/include/
 
-#cpdata.commands = $(COPY_DIR) $$PWD/resources $$OUT_PWD
-#first.depends = $(first) cpdata
-#export(first.depends)
-#export(copydata.commands)
-#QMAKE_EXTRA_TARGETS += first cpdata
+#ftgl
+LIBS += -LC:/Library/Frameworks/ftgl/bin -lftgl
+INCLUDEPATH += C:/Library/Frameworks/ftgl/include
+LIBS += -LC:/Library/Frameworks/freetype2/lib -lfreetype
+INCLUDEPATH += C:/Library/Frameworks/freetype2/include
+INCLUDEPATH += C:/Library/Frameworks/freetype2/include/freetype2
+
+#libconfig
+LIBS += -LC:/Library/Frameworks/libconfig/bin -llibconfig
+INCLUDEPATH += C:/Library/Frameworks/libconfig/include
 
 PRECOMPILED_HEADER = stdafx.h
 
@@ -34,7 +39,6 @@ SOURCES += main.cpp \
     core/processManager/processmanager.cpp \
     input/inputmanager.cpp \
     graphics/graphicmanager.cpp \
-    graphics/renderGL.cpp \
     graphics/spritemanager.cpp \
     etc/camera.cpp \
     audio/audiomanager.cpp \
@@ -49,7 +53,10 @@ SOURCES += main.cpp \
     core/processManager/processes/drawprocess.cpp \
     core/processManager/processes/keyboardenquiryprocess.cpp \
     input/controlmappingsmanager.cpp \
-    input/keycombination.cpp
+    input/keycombination.cpp \
+    core/stateManager/menustate.cpp \
+    core/exception.cpp \
+    core/stateManager/gamestate.cpp
 
 HEADERS += \
     core/appcore.h \
@@ -77,11 +84,16 @@ HEADERS += \
     core/processManager/processes/drawprocess.h \
     core/processManager/processes/keyboardenquiryprocess.h \
     input/controlmappingsmanager.h \
-    input/keycombination.h
+    input/keycombination.h \
+    core/stateManager/menustate.h \
+    core/exception.h \
+    core/stateManager/gamestate.h
 
 OTHER_FILES += \
     todo.txt
 
 DISTFILES += \
     README \
-    resources/config.ini
+    resources/config.ini \
+    resources/strings.ini \
+    resources/courier.ttf
