@@ -33,10 +33,10 @@ public:
     void drawPixel(GLfloat x, GLfloat y, GLfloat r, GLfloat g, GLfloat b, GLfloat a);
     void drawCircle(GLfloat x, GLfloat y, GLfloat radius, GLfloat r, GLfloat g, GLfloat b, GLfloat a, bool filled = 1);
 
-    void drawSprite(sprite *sp, GLfloat x, GLfloat y,
+    void drawSprite(Sprite *sp, GLfloat x, GLfloat y,
                     GLfloat scale, GLfloat rotation);
 
-    void drawText(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd, std::string text);
+    void drawText(GLfloat xSt, GLfloat ySt, std::string text);
 
     void swapBuffers();
     void clear();
@@ -57,9 +57,10 @@ private:
     void initGL(unsigned int h, unsigned int w);
     void freeGL();
 
-    SDL_Window *mainWindow;
-    SDL_GLContext glcontext;
-    GLuint currentSprite, font;
+
+    SDL_Window *_mainWindow;
+    SDL_GLContext _glcontext;
+    GLuint _currentSprite, _font;
 };
 
 #endif // GRAPHICMANAGER_H

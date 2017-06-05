@@ -28,6 +28,7 @@ typedef unsigned char uchar;
 
 //ftgl
 #include <FTGL/ftgl.h>
+#include <FTGL/FTLayout.h>
 
 //For computation
 #include <queue>
@@ -44,21 +45,7 @@ typedef unsigned char uchar;
 //My classes
 #include "etc/singleton.h"
 #include "etc/camera.h"
-
-#include "graphics/sprite.h"
-#include "audio/music.h"
-#include "audio/sound.h"
-
-#include "audio/audiomanager.h"
-#include "audio/audiomixer.h"
-
-#include "graphics/graphicmanager.h"
-#include "graphics/spritemanager.h"
-
-#include "input/inputmanager.h"
-#include "input/controlmappingsmanager.h"
-#include "core/processManager/processmanager.h"
-#include "core/stateManager/statemanager.h"
-#include "core/exception.h"
+#include "etc/color.h"
+#include "input/keystroke.h"
 
 #endif // STDAFX_H

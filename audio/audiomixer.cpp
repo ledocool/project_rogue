@@ -43,26 +43,26 @@ void AudioMixer::setChannels(int quantity)
     _channelsNum = Mix_AllocateChannels(quantity);
 }
 
-void AudioMixer::playSound(sound *s, int channel)
+void AudioMixer::playSound(Sound *s, int channel)
 {
     if( Mix_PlayChannel(channel, s->getSound(), 0) == -1 )
         std::cout << "Unable to play sound: " << SDL_GetError() << std::endl;
 }
 
-void AudioMixer::playLoop(sound *s, int channel)
+void AudioMixer::playLoop(Sound *s, int channel)
 {
     if( Mix_PlayChannel(channel, s->getSound(), -1) == -1 )
         std::cout << "Unable to play sound: " << SDL_GetError() << std::endl;
 }
 
-void AudioMixer::playMusic(music *m)
+void AudioMixer::playMusic(Music *m)
 {
     if( Mix_PlayMusic(m->getMusic(), 0) == -1)
         std::cout << "Unable to play music" << SDL_GetError() << std::endl;
 
 }
 
-void AudioMixer::playLoop(music *m)
+void AudioMixer::playLoop(Music *m)
 {
     if( Mix_PlayMusic(m->getMusic(), -1) == -1)
         std::cout << "Unable to play music" << SDL_GetError() << std::endl;

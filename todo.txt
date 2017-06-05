@@ -8,3 +8,11 @@ Sound:
 
 Input:
     1. Make confings human-readable. (std::map container with <string, keystroke> pairs)
+
+Remove processes as they are not currently used with this engine architechture.
+
+
+Game:
+1. Make a basic test map and display it on screen.
+2. Create basic interface for the game.
+3. Create a character entity and tie it to controls.

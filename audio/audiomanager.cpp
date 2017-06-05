@@ -12,7 +12,7 @@ AudioManager::~AudioManager()
         delete _music_array[i];
 }
 
-bool AudioManager::regSound(sound *snd)
+bool AudioManager::regSound(Sound *snd)
 {
     for(uint i=0; i<_sound_array.size(); i++)
         if(_sound_array[i] == snd)
@@ -22,12 +22,12 @@ bool AudioManager::regSound(sound *snd)
     return true;
 }
 
-bool AudioManager::unregRound(sound *snd)
+bool AudioManager::unregRound(Sound *snd)
 {
     for(uint i=0; i<_sound_array.size(); i++)
         if(_sound_array[i] == snd)
         {
-            sound *s = _sound_array[i];
+            Sound *s = _sound_array[i];
             _sound_array.erase(_sound_array.begin()+i);
             delete s;
 
@@ -37,7 +37,7 @@ bool AudioManager::unregRound(sound *snd)
     return false;
 }
 
-bool AudioManager::regMusic(music *snd)
+bool AudioManager::regMusic(Music *snd)
 {
     for(uint i=0; i<_music_array.size(); i++)
         if(_music_array[i] == snd)
@@ -47,12 +47,12 @@ bool AudioManager::regMusic(music *snd)
     return true;
 }
 
-bool AudioManager::unregMusic(music *snd)
+bool AudioManager::unregMusic(Music *snd)
 {
     for(uint i=0; i<_music_array.size(); i++)
         if(_music_array[i] == snd)
         {
-            music *s = _music_array[i];
+            Music *s = _music_array[i];
             _music_array.erase(_music_array.begin()+i);
             delete s;
 

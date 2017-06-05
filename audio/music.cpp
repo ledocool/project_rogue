@@ -1,20 +1,20 @@
 #include "music.h"
 
-music::music()
+Music::Music()
 {
 }
 
-music::music(const char *filepath)
+Music::Music(const char *filepath)
 {
     load(filepath);
 }
 
-music::~music()
+Music::~Music()
 {
     kill();
 }
 
-bool music::load(const char *filepath)
+bool Music::load(const char *filepath)
 {
     chunk = Mix_LoadMUS (filepath);
     name = filepath;
@@ -26,17 +26,17 @@ bool music::load(const char *filepath)
     return true;
 }
 
-void music::reload()
+void Music::reload()
 {
     load(name.c_str());
 }
 
-void music::kill()
+void Music::kill()
 {
     Mix_FreeMusic(chunk);
 }
 
-Mix_Music *music::getMusic()
+Mix_Music *Music::getMusic()
 {
     return chunk;
 }

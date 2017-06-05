@@ -1,19 +1,19 @@
 #include "console.h"
 
-console::console()
+Console::Console()
 {
     _maxEntries = 0;
     _currentNumber = 0;
     _entries.resize(_maxEntries);
 }
 
-console::console(int maxEntries)
+Console::Console(int maxEntries)
 {
     _maxEntries = maxEntries;
     _entries.resize(_maxEntries);
 }
 
-void console::addEntry(const char *entry)
+void Console::addEntry(const char *entry)
 {
     if(_maxEntries == 0)
         return;
@@ -23,19 +23,19 @@ void console::addEntry(const char *entry)
         _entries.pop_back();
     }
 
-    struct entry a;
+    struct Entry a;
     a.message = entry;
     a.key = ++ _currentNumber;
     _entries.push_front(a);
 }
 
-void console::resizeQueue(int newMaxEntries)
+void Console::resizeQueue(int newMaxEntries)
 {
     _maxEntries = newMaxEntries;
     _entries.resize(_maxEntries);
 }
 
-std::string console::getMessageByKey(uint key)
+std::string Console::getMessageByKey(uint key)
 {
     uint i;
     for(i=0; i<_entries.size(); i++)

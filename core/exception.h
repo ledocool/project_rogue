@@ -1,7 +1,7 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 
-#include <string>
+#include "stdafx.h"
 
 namespace errorCodes {
     enum errorCodes
@@ -12,17 +12,19 @@ namespace errorCodes {
     };
 }
 
-class Exception
+class BasicException
 {
 public:
-    Exception();
-    Exception(std::string message, errorCodes::errorCodes errorcode);
-    Exception(const char *message, errorCodes::errorCodes errorcode);
+    BasicException(std::string message, errorCodes::errorCodes errorcode);
+    BasicException(const char *message, errorCodes::errorCodes errorcode);
 
-    std::string getMessage();
+    const std::string getMessage() const;
     int getErrorCode();
+    const char *what() const;
 
 private:
+    void init(std::string message, errorCodes::errorCodes errorcode);
+
     std::string exceptionMessage;
     errorCodes::errorCodes errorcode;
 };

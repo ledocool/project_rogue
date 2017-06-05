@@ -1,25 +1,25 @@
 #include "sprite.h"
 
-sprite::sprite()
+Sprite::Sprite()
 {
-    height = 0;
-    width = 0;
-    texture = 0;
-    name = "";
+    _height = 0;
+    _width = 0;
+    _texture = 0;
+    _name = "";
 }
 
-sprite::sprite(const char *filename)
+Sprite::Sprite(const char *filename)
 {
     if(load(filename) == false)
         throw SDL_GetError();
 }
 
-sprite::~sprite()
+Sprite::~Sprite()
 {
     kill();
 }
 
-bool sprite::load(const char *filename)
+bool Sprite::load(const char *filename)
 {
     IMG_Init( IMG_INIT_PNG );
     SDL_Surface *surf = IMG_Load(filename);
@@ -31,13 +31,13 @@ bool sprite::load(const char *filename)
         return false;
     }
 
-    height = surf->h;
-    width = surf->w;
+    _height = surf->h;
+    _width = surf->w;
 
-    name = filename;
+    _name = filename;
 
-    glGenTextures(1, &texture); //gen tex id
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glGenTextures(1, &_texture); //gen tex id
+    glBindTexture(GL_TEXTURE_2D, _texture);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -46,9 +46,9 @@ bool sprite::load(const char *filename)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //Beauty grafon
 
     if(surf->format->Amask)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, surf->pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, surf->pixels);
     else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
 
     SDL_FreeSurface(surf);
     IMG_Quit();
@@ -57,22 +57,22 @@ bool sprite::load(const char *filename)
     return true;
 }
 
-GLuint sprite::getTexture()
+GLuint Sprite::getTexture()
 {
-    return texture;
+    return _texture;
 }
 
-GLuint sprite::getHeight()
+GLuint Sprite::getHeight()
 {
-    return height;
+    return _height;
 }
 
-GLuint sprite::getWidth()
+GLuint Sprite::getWidth()
 {
-    return width;
+    return _width;
 }
 
-void sprite::kill()
+void Sprite::kill()
 {
-    glDeleteTextures(1, &texture);
+    glDeleteTextures(1, &_texture);
 }

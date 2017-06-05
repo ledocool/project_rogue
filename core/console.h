@@ -3,23 +3,23 @@
 
 #include "stdafx.h"
 
-struct entry{
+struct Entry{
     uint key;
     std::string message;
 };
 
-class console
+class Console
 {
 public:
-    console();
-    console(int maxEntries);
-    void addEntry(const char *entry);
+    Console();
+    Console(int maxEntries);
+    void addEntry(const char *Entry);
     void resizeQueue(int newMaxEntries);
     std::string getMessageByKey(uint key);
     void getMessageByNumber(uint number);
 
 private:
-    std::deque <entry> _entries;
+    std::deque <Entry> _entries;
 
     uint _currentNumber, _maxEntries;
 };

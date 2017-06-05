@@ -1,20 +1,20 @@
 #include "sound.h"
 
-sound::sound()
+Sound::Sound()
 {
 }
 
-sound::sound(const char *filepath)
+Sound::Sound(const char *filepath)
 {
     load(filepath);
 }
 
-sound::~sound()
+Sound::~Sound()
 {
     kill();
 }
 
-bool sound::load(const char *filepath)
+bool Sound::load(const char *filepath)
 {
     chunk = Mix_LoadWAV (filepath);
     name = filepath;
@@ -26,17 +26,17 @@ bool sound::load(const char *filepath)
     return true;
 }
 
-void sound::reload()
+void Sound::reload()
 {
     load(name.c_str());
 }
 
-void sound::kill()
+void Sound::kill()
 {
     Mix_FreeChunk(chunk);
 }
 
-void sound::setVolume(int v)
+void Sound::setVolume(int v)
 {
     if (v > MIX_MAX_VOLUME)
         vol = MIX_MAX_VOLUME;
@@ -46,7 +46,7 @@ void sound::setVolume(int v)
     prev_vol = Mix_VolumeChunk(chunk, v);
 }
 
-Mix_Chunk *sound::getSound()
+Mix_Chunk *Sound::getSound()
 {
     return chunk;
 }

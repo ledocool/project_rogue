@@ -3,13 +3,13 @@
 
 #include "stdafx.h"
 
-class sprite
+class Sprite
 {
 friend class graphicsManager;
 public:
-    sprite();
-    sprite(const char *filename);
-    ~sprite();
+    Sprite();
+    Sprite(const char *filename);
+    ~Sprite();
 
     bool load(const char *filename);
 
@@ -20,9 +20,9 @@ public:
 private:
     void kill(); //deletes sprite
 
-    GLuint texture;
-    GLuint height, width;
-    std::string name;
+    GLuint _texture;
+    GLuint _height, _width;
+    std::string _name;
 
 };
 #endif // SPRITE_H

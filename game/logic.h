@@ -1,10 +1,10 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
-class logic
+class Logic //no logic
 {
 public:
-    logic();
+    Logic();
 };
 
 #endif // LOGIC_H

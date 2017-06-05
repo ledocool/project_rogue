@@ -36,7 +36,6 @@ SOURCES += main.cpp \
     core/appcore.cpp \
     core/stateManager/state.cpp \
     core/stateManager/statemanager.cpp \
-    core/processManager/processmanager.cpp \
     input/inputmanager.cpp \
     graphics/graphicmanager.cpp \
     graphics/spritemanager.cpp \
@@ -50,13 +49,13 @@ SOURCES += main.cpp \
     game/map.cpp \
     game/tile.cpp \
     core/console.cpp \
-    core/processManager/processes/drawprocess.cpp \
-    core/processManager/processes/keyboardenquiryprocess.cpp \
     input/controlmappingsmanager.cpp \
     input/keycombination.cpp \
     core/stateManager/menustate.cpp \
     core/exception.cpp \
-    core/stateManager/gamestate.cpp
+    core/stateManager/gamestate.cpp \
+    game/interface/buttonbase.cpp \
+    etc/color.cpp
 
 HEADERS += \
     core/appcore.h \
@@ -64,8 +63,6 @@ HEADERS += \
     core/stateManager/state.h \
     etc/singleton.h \
     core/stateManager/statemanager.h \
-    core/processManager/processmanager.h \
-    core/processManager/process.h \
     input/inputmanager.h \
     input/keystroke.h \
     graphics/graphicmanager.h \
@@ -80,14 +77,14 @@ HEADERS += \
     game/map.h \
     game/tile.h \
     core/console.h \
-    core/processManager/event.h \
-    core/processManager/processes/drawprocess.h \
-    core/processManager/processes/keyboardenquiryprocess.h \
     input/controlmappingsmanager.h \
     input/keycombination.h \
     core/stateManager/menustate.h \
     core/exception.h \
-    core/stateManager/gamestate.h
+    core/stateManager/gamestate.h \
+    game/interface/buttonbase.h \
+    etc/color.h \
+    my_classes.h
 
 OTHER_FILES += \
     todo.txt

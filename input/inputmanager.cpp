@@ -4,12 +4,12 @@ InputManager::InputManager()
 {
     //maxKeys = 255; //No, srsly, can't be more;
     //keyStates.resize(256);
-    mouseStates.resize(5);
+    _mouseStates.resize(5);
 }
 
 bool InputManager::keyIsUp(keystroke keyNum)
 {
-    if (keyStates[keyNum] == KEY_IS_UP)
+    if (_keyStates[keyNum] == KEY_IS_UP)
         return true;
     else
         return false;
@@ -17,7 +17,7 @@ bool InputManager::keyIsUp(keystroke keyNum)
 
 bool InputManager::keyIsDown(keystroke keyNum)
 {
-    if (keyStates[keyNum] == KEY_IS_DOWN)
+    if (_keyStates[keyNum] == KEY_IS_DOWN)
         return true;
     else
         return false;
@@ -25,7 +25,7 @@ bool InputManager::keyIsDown(keystroke keyNum)
 
 bool InputManager::keyIsHeld(keystroke keyNum)
 {
-    if (keyStates[keyNum] == KEY_IS_HELD)
+    if (_keyStates[keyNum] == KEY_IS_HELD)
         return true;
     else
         return false;
@@ -33,7 +33,7 @@ bool InputManager::keyIsHeld(keystroke keyNum)
 
 bool InputManager::keyIsToggled(keystroke keyNum)
 {
-    if (keyStates[keyNum] == KEY_IS_TOGGLED)
+    if (_keyStates[keyNum] == KEY_IS_TOGGLED)
         return true;
     else
         return false;
@@ -41,7 +41,7 @@ bool InputManager::keyIsToggled(keystroke keyNum)
 
 bool InputManager::mouseDown(mouseClick mouseKeyNum)
 {
-    if(mouseStates[mouseKeyNum] == KEY_IS_DOWN)
+    if(_mouseStates[mouseKeyNum] == KEY_IS_DOWN)
         return true;
     else
         return false;
@@ -64,23 +64,23 @@ bool InputManager::updateState()
                 return true;
                 break;
             case SDL_KEYDOWN:
-                keyStates[event.key.keysym.sym] = KEY_IS_DOWN;
+                _keyStates[event.key.keysym.sym] = KEY_IS_DOWN;
                 keys.push_back((keystroke)event.key.keysym.sym);
                 break;
             case SDL_KEYUP:
-                keyStates[event.key.keysym.sym] = KEY_IS_UP;
+                _keyStates[event.key.keysym.sym] = KEY_IS_UP;
                 keys.push_back((keystroke)event.key.keysym.sym);
                 break;
             case SDL_MOUSEMOTION:
-                m_MouseX = event.motion.x;
-                m_MouseY = event.motion.y; //Temp. Then we will check window coords
+                _m_MouseX = event.motion.x;
+                _m_MouseY = event.motion.y; //Temp. Then we will check window coords
                 break;
             case SDL_MOUSEBUTTONUP:
-                mouseStates[event.button.button] = KEY_IS_UP;
+                _mouseStates[event.button.button] = KEY_IS_UP;
                 clicks.push_back((mouseClick)event.button.which);
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                mouseStates[event.button.button] = KEY_IS_DOWN;
+                _mouseStates[event.button.button] = KEY_IS_DOWN;
                 clicks.push_back((mouseClick)event.button.which);
                 break;
 
@@ -97,7 +97,7 @@ bool InputManager::updateState()
     //check to see if any keys haven't been released but were press
     //ie being held
 
-    for( std::map<int, short>::iterator itr = keyStates.begin(); itr != keyStates.end(); itr++ )
+    for( std::map<int, short>::iterator itr = _keyStates.begin(); itr != _keyStates.end(); itr++ )
     {
         //put no status flag
         if(itr->second == KEY_IS_UP)

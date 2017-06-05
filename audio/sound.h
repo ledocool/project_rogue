@@ -4,12 +4,12 @@
 #include "stdafx.h"
 #include "audio/audiomanager.h"
 
-class sound
+class Sound
 {
 public:
-    sound();
-    sound(const char *filepath);
-    ~sound();
+    Sound();
+    Sound(const char *filepath);
+    ~Sound();
     bool load(const char *filepath); //load sound
     void reload(); //reload
     void kill(); //unload sound

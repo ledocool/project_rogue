@@ -2,13 +2,16 @@
 #define STATEMANAGER_H
 
 #include "stdafx.h"
-#include "core/stateManager/state.h"
+#include "my_classes.h"
 #include "state.h"
+
+class State;
 
 class StateManager
 {
 public:
     bool render();
+    bool process(std::vector<keys::playerAction> actions);
     void changeState( State *st );
     void pushState( State* st );
     void popState();

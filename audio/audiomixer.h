@@ -2,6 +2,8 @@
 #define AUDIOMIXER_H
 
 #include "stdafx.h"
+#include "audio/sound.h"
+#include "audio/music.h"
 
 class AudioMixer
 {
@@ -12,10 +14,10 @@ public:
 
     void setChannels(int quantity);
 
-    void playSound(sound *s, int channel = -1); //Selects first unused channel by default
-    void playLoop(sound *s, int channel = -1);
-    void playMusic(music *m);
-    void playLoop(music *m);
+    void playSound(Sound *s, int channel = -1); //Selects first unused channel by default
+    void playLoop(Sound *s, int channel = -1);
+    void playMusic(Music *m);
+    void playLoop(Music *m);
 
     uint getChannelsQuantity();
 

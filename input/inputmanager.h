@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "input/keystroke.h"
+#include "my_classes.h"
 
 //KeyStates
 #define KEY_IS_UP      0
@@ -28,10 +29,10 @@ public:
     bool updateState();
 
 private:
-    std::map < int, short > keyStates;
-    int m_MouseX, m_MouseY;
-    std::vector < short > mouseStates;
-    std::map < int, short > videoStates;
+    std::map < int, short > _keyStates;
+    int _m_MouseX, _m_MouseY;
+    std::vector < short > _mouseStates;
+    std::map < int, short > _videoStates;
 
 };
 

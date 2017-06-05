@@ -4,10 +4,10 @@
 
 using namespace keys;
 
-class keyCombination
+class KeyCombination
 {
 public:
-    keyCombination(playerAction a, keystroke k);
+    KeyCombination(playerAction a, keystroke k);
     playerAction getAction();
     keystroke getStroke();
 

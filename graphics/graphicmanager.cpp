@@ -16,7 +16,6 @@ bool GraphicManager::init(const char *title, unsigned int x, unsigned int y, uns
     {
         return false;
     }
-    //readyfont();
     initGL(height, width);
 
     return true;
@@ -46,7 +45,7 @@ void GraphicManager::scaleViewport(GLfloat xscale, GLfloat yscale)
 
 void GraphicManager::swapBuffers()
 {
-    SDL_GL_SwapWindow(mainWindow);
+    SDL_GL_SwapWindow(_mainWindow);
 }
 
 void GraphicManager::clear()
@@ -54,73 +53,14 @@ void GraphicManager::clear()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-//void GraphicManager::readyfont()
-//{
-////    TTF_Font *baseFnt = NULL;
-////    baseFnt = TTF_OpenFont("courier.ttf", 24);
-////    std::cout << TTF_GetError() << std::endl;
-////    SDL_Color black;
-////    black.r = 0; black.b = 0; black.g = 0; black.a = 0;
-////    SDL_Surface *surf = TTF_RenderUTF8_Solid(baseFnt, "Hello world", black);
-////    //SDL_PixelFormat *fmt = surf->format;
-////    //fmt->format = SDL_PIXELFORMAT_RGB888;
-////    //SDL_Surface *surf2 = SDL_ConvertSurface(surf, fmt, 0);
-////    //SDL_FreeSurface(surf);
-////    //surf = surf2;
-
-////    if(surf == NULL)
-////    {
-////        std::cout << "Failed loading texture: " << SDL_GetError() << std::endl;
-////        IMG_Quit();
-////        return;
-////    }
-
-////    GLuint texture;
-
-////    GLfloat h, w;
-
-////    h = surf->h;
-////    w = surf->w;
-////    glGenTextures(1, &texture); //gen tex id
-////    glBindTexture(GL_TEXTURE_2D, texture);
-
-////    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-////    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-////    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-////    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //Beauty grafon
-
-////    if(surf->format->Amask)
-////        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surf->pixels);
-////    else
-////        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
-
-////    GLfloat height = surf->h,//fabs(yEd - ySt),
-////            width  = surf->w;//fabs(xEd - xSt);
-
-////    std::vector<int> ii;
-////    ii.resize(surf->h * surf->w);
-
-////    for(int i=0; i<surf->h * surf->w; i++)
-////    {
-////        ii[i] = *(int *)(surf->pixels + i);
-////    }
-
-////    //int ioi = SDL_PIXELFORMAT_BGR24;
-
-////    SDL_FreeSurface(surf);
-////    TTF_CloseFont(baseFnt);
-////    font = texture;
-//}
-
 void GraphicManager::getSize(int *w, int *h)
 {
-    SDL_GetWindowSize(mainWindow, w, h);
+    SDL_GetWindowSize(_mainWindow, w, h);
 }
 
 void GraphicManager::setSize(int w, int h)
 {
-    SDL_SetWindowSize(mainWindow, w, h);
+    SDL_SetWindowSize(_mainWindow, w, h);
 }
 
 void GraphicManager::resizeViewport()
@@ -135,8 +75,8 @@ void GraphicManager::resizeViewport()
 
 void GraphicManager::drawLine(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd, GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 {
-    //glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
 
     glBegin(GL_LINES);
         glColor4f(r,g,b,a);
@@ -147,13 +87,13 @@ void GraphicManager::drawLine(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd
 
     glColor4f(0., 0., 0., 1.0);
 
-    //glPopMatrix();
+    glPopMatrix();
 }
 
 void GraphicManager::drawRect(GLfloat x, GLfloat y, GLfloat width, GLfloat height, GLfloat r, GLfloat g, GLfloat b, GLfloat a, bool filled)
 {
-    //glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
     glTranslatef(x, y, 0);
 
     GLfloat left, bottom, top, right;
@@ -182,13 +122,13 @@ void GraphicManager::drawRect(GLfloat x, GLfloat y, GLfloat width, GLfloat heigh
 
     glColor4f(0., 0., 0., 1.0);
 
-    //glPopMatrix();
+    glPopMatrix();
 }
 
 void GraphicManager::drawPixel(GLfloat x, GLfloat y, GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 {
-    //glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
 
     glBegin(GL_POINTS);
 
@@ -199,13 +139,13 @@ void GraphicManager::drawPixel(GLfloat x, GLfloat y, GLfloat r, GLfloat g, GLflo
 
     glColor4f(0., 0., 0., 1.0);
 
-    //glPopMatrix();
+    glPopMatrix();
 }
 
 void GraphicManager::drawCircle(GLfloat x, GLfloat y, GLfloat radius, GLfloat r, GLfloat g, GLfloat b, GLfloat a, bool filled)
 {
-    //glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
     glTranslatef(x, y, 0);
 
     unsigned short N = 50;
@@ -231,17 +171,17 @@ void GraphicManager::drawCircle(GLfloat x, GLfloat y, GLfloat radius, GLfloat r,
 
     glColor4f(0., 0., 0., 1.0);
 
-    //glPopMatrix();
+    glPopMatrix();
 }
 
-void GraphicManager::drawSprite(sprite *sp, GLfloat x, GLfloat y, GLfloat scale, GLfloat rotation)
+void GraphicManager::drawSprite(Sprite *sp, GLfloat x, GLfloat y, GLfloat scale, GLfloat rotation)
 {
     //Push new matrices for this sprite
     glMatrixMode(GL_TEXTURE);
     glPushMatrix();
     glLoadIdentity();
-    //glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
 
 
     GLfloat height = sp->getHeight(),
@@ -269,8 +209,8 @@ void GraphicManager::drawSprite(sprite *sp, GLfloat x, GLfloat y, GLfloat scale,
 
     glEnd();
 
-    //glMatrixMode(GL_MODELVIEW);
-    //glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
     glMatrixMode(GL_TEXTURE);
     glPopMatrix();
 
@@ -278,30 +218,58 @@ void GraphicManager::drawSprite(sprite *sp, GLfloat x, GLfloat y, GLfloat scale,
 
 }
 
-void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd, std::string text)
+void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, std::string text)
 {
-    FTGLPixmapFont font("courier.ttf");
-    // If something went wrong, bail out.
-    if(font.Error())
-        std::cout << "Error during font preparation" << std::endl;
+    int wW, wH;
+    getSize(&wW, &wH);
 
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    FTBufferFont *font = new FTBufferFont("courier.ttf");
+
+    ///the coorinate should now be relative the box!
+
+    // If something went wrong, bail out.
+    if(font->Error())
+    {
+        std::cout << "Error during font preparation" << std::endl;
+        return;
+    }
+
+    GLfloat top, left;
+    top = wH - ySt - 24;
+    left = xSt;
+
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+
+    glColor4d(1.0, 0.0, 0.0, 1.0);
+
+    FTBBox bb;
     // Set the font size and render a small text.
-    font.FaceSize(24);
-    font.Render(text.c_str(), -1, FTPoint(xSt, ySt));
+    font->FaceSize(24);
+    bb = font->BBox(text.c_str());
+    font->Render(text.c_str(), -1, FTPoint(left, top));
+    delete font;
+
+    glPopAttrib();
+    glPopMatrix();
 }
 
 bool GraphicManager::makeWindow(const char *title, unsigned int x, unsigned int y, unsigned int height, unsigned int width)
 {
-    mainWindow = SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    _mainWindow = SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
-    if(mainWindow == NULL)
+    if(_mainWindow == NULL)
     {
         std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
         return false;
     }
 
-    glcontext = SDL_GL_CreateContext(mainWindow);
-    SDL_GL_MakeCurrent(mainWindow, glcontext);
+    _glcontext = SDL_GL_CreateContext(_mainWindow);
+    SDL_GL_MakeCurrent(_mainWindow, _glcontext);
 
     return true;
 }
@@ -309,8 +277,8 @@ bool GraphicManager::makeWindow(const char *title, unsigned int x, unsigned int 
 void GraphicManager::destroyWindow()
 {
     //delete font;
-    SDL_DestroyWindow(mainWindow);
-    SDL_GL_DeleteContext(glcontext);
+    SDL_DestroyWindow(_mainWindow);
+    SDL_GL_DeleteContext(_glcontext);
 }
 
 void GraphicManager::setMatrix(GLfloat x, GLfloat y, GLfloat width, GLfloat height, float rotation)
@@ -319,7 +287,7 @@ void GraphicManager::setMatrix(GLfloat x, GLfloat y, GLfloat width, GLfloat heig
     glMatrixMode(GL_MODELVIEW);
     glTranslatef(x, y, 0.0f);
 
-    //!Scaling/rotationg aint working for now (aint needed really).
+    //!Scaling/rotationg not working for now (not needed really).
     //glMatrixMode(GL_TEXTURE);
     if( fabs(rotation)> 1e-5 )
     {
@@ -335,11 +303,11 @@ void GraphicManager::setMatrix(GLfloat x, GLfloat y, GLfloat width, GLfloat heig
 
 void GraphicManager::initDraw(GLuint spr)
 {
-    if(currentSprite != spr)
+    if(_currentSprite != spr)
     {
         glBindTexture(GL_TEXTURE_2D, spr);
         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-        currentSprite = spr;
+        _currentSprite = spr;
     }
 }
 
@@ -362,7 +330,7 @@ void GraphicManager::initGL(unsigned int h, unsigned int w)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glOrtho(0.0, w, h, 0.0, 0.0f, 1.0f);
+    glOrtho(0.0, w, 0.0, h, 0.0f, 1.0f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

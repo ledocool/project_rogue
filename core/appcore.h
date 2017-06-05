@@ -15,12 +15,15 @@ public:
 private:
     int loop();
     void init();   //Asks all subsystems to init themselves
+    void createControllerObjects();
+    void initSDL();
+    void loadConfig(int *w, int *h, int *px, int *py);
+
     void finish(); //Stops program from running
 
     StateManager *stateMan;
-    ProcessManager *processMan;
     InputManager *inputMan;
-    controlMappingsManager *mappMan;
+    ControlMappingsManager *mappMan;
 
     GraphicManager *graphicMan;
     SpriteManager *spriteMan;

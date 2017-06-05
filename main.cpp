@@ -9,9 +9,9 @@ int main(int argc __attribute__((unused)) , char **argv __attribute__((unused)) 
 
         return 0;
     }
-    catch(Exception e)
+    catch(BasicException &e)
     {
-        //TODO: log exception message;
+        std::cout << e.what() << std::endl;
         return e.getErrorCode();
     }
 }

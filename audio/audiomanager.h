@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 
-class sound;
-class music;
+class Sound;
+class Music;
 
 class AudioManager
 {
@@ -12,15 +12,15 @@ public:
     AudioManager();
     ~AudioManager();
 
-    bool regSound(sound *snd);
-    bool unregRound(sound *snd);
+    bool regSound(Sound *snd);
+    bool unregRound(Sound *snd);
 
-    bool regMusic(music *snd);
-    bool unregMusic(music *snd);
+    bool regMusic(Music *snd);
+    bool unregMusic(Music *snd);
 
 private:
-    std::vector <sound *> _sound_array;
-    std::vector <music *> _music_array;
+    std::vector <Sound *> _sound_array;
+    std::vector <Music *> _music_array;
 };
 
 #endif // AUDIOMANAGER_H

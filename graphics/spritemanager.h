@@ -10,13 +10,13 @@ public:
     SpriteManager();
     ~SpriteManager();
 
-    bool regSprite(sprite *spt);
-    bool unregSprite(sprite *spt);
+    bool regSprite(Sprite *spt);
+    bool unregSprite(Sprite *spt);
 
-    sprite* getspriteByNumber(uint i);
+    Sprite* getspriteByNumber(uint i);
 
 private:
-    std::vector <sprite *> sprite_array;
+    std::vector <Sprite *> _sprite_array;
 
 };
 

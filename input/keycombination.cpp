@@ -1,17 +1,17 @@
 #include "keycombination.h"
 
-keyCombination::keyCombination(playerAction a, keystroke k)
+KeyCombination::KeyCombination(playerAction a, keystroke k)
 {
     _action = a;
     _key = k;
 }
 
-playerAction keyCombination::getAction()
+playerAction KeyCombination::getAction()
 {
     return _action;
 }
 
-keystroke keyCombination::getStroke()
+keystroke KeyCombination::getStroke()
 {
     return _key;
 }

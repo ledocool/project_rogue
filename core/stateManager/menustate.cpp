@@ -4,8 +4,6 @@
 MenuState::MenuState()
 {
     menuItems.resize(2);
-    //gman = Singleton<GraphicManager>::get();
-    //inputMan = Singleton<InputManager>::get();
 }
 
 MenuState::~MenuState()
@@ -16,7 +14,6 @@ MenuState::~MenuState()
 void MenuState::render()
 {
     graphicMan->resetMatrix(); //draw in screens coordinates;
-
     graphicMan->scaleViewport(  1., 1. );
     graphicMan->moveTo( 0., 0. );
     graphicMan->clear();
@@ -24,25 +21,36 @@ void MenuState::render()
     graphicMan->drawRect(2, 2, 5, 5, 0, 0, 0, 1);
     graphicMan->drawRect(10, 10, 5, 5, 0, 0, 0, 1);
 
-    graphicMan->drawText(0, 0, 0, 0, "Helloworld");
+    graphicMan->drawText(40, 50, "Start (q)");
+    graphicMan->drawText(40, 100, "Exit");
+
 
     graphicMan->swapBuffers();
 }
 
+void MenuState::processLogic(std::vector<playerAction> actions)
+{
+    for(uint i=0; i<actions.size(); i++)
+    {
+        if(actions[i] == keys::CHANGE_STATE)
+        {
+            stateMan->pushState(new GameState());
+        }
+    }
+}
+
 void MenuState::enter()
 {
-    menuItems[0] = std::pair<int, std::string> (0, "Start");
-    menuItems[1] = std::pair<int, std::string> (0, "Exit");
 }
 
 void MenuState::pause()
 {
-    //throw Exception("Unable to pause state", errorCodes::stateError);
+    //throw BasicException("Unable to resume state", errorCodes::stateError);//Exception("Unable to pause state", errorCodes::stateError);
 }
 
 void MenuState::resume()
 {
-    //throw Exception("Unable to resume state", errorCodes::stateError);
+    //throw BasicException("Unable to resume state", errorCodes::stateError);
 }
 
 void MenuState::exit()
@@ -50,7 +58,3 @@ void MenuState::exit()
     printf ("Imma exiting memu\n");
 }
 
-void MenuState::loop()
-{
-
-}

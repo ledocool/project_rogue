@@ -1,30 +1,34 @@
 #include "exception.h"
 
-Exception::Exception()
+BasicException::BasicException(std::string message, errorCodes::errorCodes errorcode)
 {
-    exceptionMessage = "";
-    errorcode = errorCodes::noError;
+    init(message, errorcode);
 }
 
-Exception::Exception(std::string message, errorCodes::errorCodes errorcode)
+BasicException::BasicException(const char *message, errorCodes::errorCodes errorcode)
+{
+    std::string msg = message;
+    init(msg, errorcode);
+}
+
+const std::string BasicException::getMessage() const
+{
+    return exceptionMessage;
+}
+
+int BasicException::getErrorCode()
+{
+    return errorcode;
+}
+
+void BasicException::init(std::string message, errorCodes::errorCodes errorcode)
 {
     this->exceptionMessage = message;
     this->errorcode = errorcode;
 }
 
-Exception::Exception(const char *message, errorCodes::errorCodes errorcode)
-{
-    std::string msg = message;
-    Exception(msg, errorcode);
-}
 
-std::string Exception::getMessage()
+const char *BasicException::what() const
 {
-    return exceptionMessage;
+    return exceptionMessage.c_str();
 }
-
-int Exception::getErrorCode()
-{
-    return errorcode;
-}
-
