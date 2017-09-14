@@ -11,7 +11,7 @@ class StateManager
 {
 public:
     bool render();
-    bool process(std::vector<keys::playerAction> actions);
+    bool process(Uint32 ms);
     void changeState( State *st );
     void pushState( State* st );
     void popState();

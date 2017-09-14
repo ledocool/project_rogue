@@ -70,7 +70,7 @@ void GraphicManager::resizeViewport()
     glViewport( 0, 0, ( GLsizei )w, ( GLsizei )h );
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, w, h, 0.0, 0.0f, 1.0f);
+    glOrtho(0.0, w, 0.0, h, 0.0f, 1.0f);
 }
 
 void GraphicManager::drawLine(GLfloat xSt, GLfloat ySt, GLfloat xEd, GLfloat yEd, GLfloat r, GLfloat g, GLfloat b, GLfloat a)
@@ -218,7 +218,7 @@ void GraphicManager::drawSprite(Sprite *sp, GLfloat x, GLfloat y, GLfloat scale,
 
 }
 
-void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, std::string text)
+void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, std::string text, GLdouble r, GLdouble g, GLdouble b, GLdouble a)
 {
     int wW, wH;
     getSize(&wW, &wH);
@@ -226,14 +226,20 @@ void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, std::string text)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
-    FTBufferFont *font = new FTBufferFont("courier.ttf");
+
+    if(_font == NULL)
+    {
+        _font = new FTBufferFont("courier.ttf");
+    }
+
 
     ///the coorinate should now be relative the box!
 
     // If something went wrong, bail out.
-    if(font->Error())
+    if(_font->Error())
     {
         std::cout << "Error during font preparation" << std::endl;
+        delete _font;
         return;
     }
 
@@ -245,20 +251,22 @@ void GraphicManager::drawText(GLfloat xSt, GLfloat ySt, std::string text)
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
 
-    glColor4d(1.0, 0.0, 0.0, 1.0);
+    glColor4d(r, g, b, a);
 
-    FTBBox bb;
+    //FTBBox bb;
     // Set the font size and render a small text.
-    font->FaceSize(24);
-    bb = font->BBox(text.c_str());
-    font->Render(text.c_str(), -1, FTPoint(left, top));
-    delete font;
+    _font->FaceSize(50);
+    //bb = font->BBox(text.c_str());
+    //FTBBox ftbb = font->BBox(text.c_str(), -1, FTPoint(left, top));
+    _font->Render(text.c_str(), -1, FTPoint(left, top));
 
     glPopAttrib();
     glPopMatrix();
+
+    //glColor4d(0., 0., 0., 1.);
 }
 
-bool GraphicManager::makeWindow(const char *title, unsigned int x, unsigned int y, unsigned int height, unsigned int width)
+bool GraphicManager::makeWindow(const char *title, const unsigned int x, const unsigned int y, const unsigned int height, const unsigned int width)
 {
     _mainWindow = SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
@@ -339,4 +347,14 @@ void GraphicManager::initGL(unsigned int h, unsigned int w)
 void GraphicManager::freeGL()
 {
     //Well, what if?
+}
+
+void GraphicManager::initFonts()
+{
+
+}
+
+void GraphicManager::freeFonts()
+{
+
 }

@@ -16,26 +16,36 @@ Map::Map(uint w, uint h)
     generate(w,h,0);
 }
 
+Map::~Map()
+{
+    uint entitySize = _entities.size();
+    //remove all entities;
+    //todo: iterator;
+    for(uint i=0; i < entitySize; i++)
+    {
+        delete _entities[i];
+    }
+}
+
 void Map::generate(uint w __attribute__((unused)), uint h __attribute__((unused)), uint seed __attribute__((unused)) = 0 )
 {
     _playfield.resize(w*h);
+    Sprite *wall, *floor;
+    wall = new Sprite("tiles/wall.png");
+    floor = new Sprite("tiles/floor.png");
+
     for(uint i=0; i<h; i++)
     {
-        for(uint j=0; j<w; j++){
+        for(uint j=0; j<w; j++)
+        {
+            uint index = getItemIndex(j, i);
 
-            Color cl;
-            if( (i+j) % 2 == 0){
-                cl.r = 1.f;
-                cl.g = 1.f;
-                cl.b = 1.f;
+            if(i == 0 || i == h-1 || j == 0 || j == w-1)
+            {
+                _playfield[index] = Tile(wall, false, false, false);
             }else{
-                cl.r = 0.f;
-                cl.g = 0.f;
-                cl.b = 0.f;
+                _playfield[index] = Tile(floor, true, true, false);
             }
-
-            Tile tl(cl);
-            _playfield[getItemIndex(j, i)] = tl;
         }
     }
 }
@@ -78,9 +88,32 @@ std::vector <Tile> Map::getRenderingSquare(uint x, uint y, uint width, uint heig
     return rets;
 }
 
+std::vector<Entity> Map::getEntities(int x, int y, int xEd, int yEd)
+{
+    uint entityAmount = _entities.size();
+
+    std::vector<Entity> result = std::vector<Entity>();
+    result.reserve(entityAmount);
+    for(int i=0; i<entityAmount; i++)
+    {
+        if(_entities[i]->_x <= xEd && _entities[i]->_x >= x
+                && _entities[i]->_y <= yEd && _entities[i]->_y >= y )
+        {
+            result.push_back(_entities[i]->copy());
+        }
+    }
+
+    return result;
+}
+
 void Map::getMapSize(uint *w, uint *h)
 {
     *w = _width;
     *h = _height;
+}
+
+bool Map::addEntity(Entity* e)
+{
+    _entities.push_back(e);
 }
 

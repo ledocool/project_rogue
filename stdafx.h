@@ -45,7 +45,6 @@ typedef unsigned char uchar;
 //My classes
 #include "etc/singleton.h"
 #include "etc/camera.h"
-#include "etc/color.h"
 #include "input/keystroke.h"
 
 #endif // STDAFX_H

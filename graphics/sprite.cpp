@@ -53,7 +53,7 @@ bool Sprite::load(const char *filename)
     SDL_FreeSurface(surf);
     IMG_Quit();
 
-    //singleton<spriteManager>::get()->regSprite(this);
+    Singleton<SpriteManager>::get()->regSprite(this);
     return true;
 }
 

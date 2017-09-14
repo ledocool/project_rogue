@@ -55,7 +55,9 @@ SOURCES += main.cpp \
     core/exception.cpp \
     core/stateManager/gamestate.cpp \
     game/interface/buttonbase.cpp \
-    etc/color.cpp
+    etc/color.cpp \
+    game/entity.cpp \
+    core/stateManager/loading.cpp
 
 HEADERS += \
     core/appcore.h \
@@ -84,7 +86,9 @@ HEADERS += \
     core/stateManager/gamestate.h \
     game/interface/buttonbase.h \
     etc/color.h \
-    my_classes.h
+    my_classes.h \
+    game/entity.h \
+    core/stateManager/loading.h
 
 OTHER_FILES += \
     todo.txt
@@ -93,4 +97,6 @@ DISTFILES += \
     README \
     resources/config.ini \
     resources/strings.ini \
-    resources/courier.ttf
+    resources/courier.ttf \
+    resources/tiles/floor.png \
+    resources/tiles/wall.png

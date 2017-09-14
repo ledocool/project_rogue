@@ -69,9 +69,9 @@ void AppCore::initSDL()
     }
 }
 
-void AppCore::loadConfig(int *w, int *h, int *px, int *py)
+void AppCore::loadConfig(int &w, int &h, int &px, int &py)
 {
-    config_t *cfg = 0;
+    config_t *cfg;
     config_init(cfg);
     int cfg_read = config_read_file(cfg, "config.ini");
 
@@ -80,22 +80,22 @@ void AppCore::loadConfig(int *w, int *h, int *px, int *py)
         throw BasicException("Unable to read config file", errorCodes::graphicInitError);
     }
 
-    if( !config_lookup_int(cfg, "window_propreties.width", w) )
+    if( !config_lookup_int(cfg, "window_propreties.width", &w) )
     {
         throw BasicException("Unable to read config file", errorCodes::graphicInitError);
     }
 
-    if( !config_lookup_int(cfg, "window_propreties.height", h) )
+    if( !config_lookup_int(cfg, "window_propreties.height", &h) )
     {
         throw BasicException("Unable to read config file", errorCodes::graphicInitError);
     }
 
-    if( !config_lookup_int(cfg, "window_propreties.window_x", px) )
+    if( !config_lookup_int(cfg, "window_propreties.window_x", &px) )
     {
         throw BasicException("Unable to read config file", errorCodes::graphicInitError);
     }
 
-    if( !config_lookup_int(cfg, "window_propreties.window_y", py) )
+    if( !config_lookup_int(cfg, "window_propreties.window_y", &py) )
     {
         throw BasicException("Unable to read config file", errorCodes::graphicInitError);
     }
@@ -126,12 +126,14 @@ AppCore::~AppCore()
 }
 
 int AppCore::loop()
-{
-    Uint32 t = 0, dt = 17;
-    Uint32 frameTime, lastUpdateTime, currentUpdateTime = SDL_GetTicks();
+{    
+    Uint32 dt = 16;
+    Uint32 frameTime, lastUpdateTime, currentUpdateTime = SDL_GetTicks(), lastFpsTime, lastProcessingTime, processingElapsed;
+    Uint32 fps = 0;
     bool quit = false;
 
-    lastUpdateTime = currentUpdateTime;
+    lastProcessingTime = lastFpsTime = lastUpdateTime = currentUpdateTime;
+    inputMan->updateState();
 
     while(!quit)
     {
@@ -139,20 +141,29 @@ int AppCore::loop()
         frameTime = currentUpdateTime - lastUpdateTime;
         lastUpdateTime = currentUpdateTime;
 
-        while(frameTime > 0)
+        int timeleft = dt - frameTime;
+        uint iters = 0;
+        do
         {
-            Uint32 cStep = frameTime > dt ? dt : frameTime;
-
+            currentUpdateTime = SDL_GetTicks();
+            processingElapsed = currentUpdateTime - lastProcessingTime;
+            lastProcessingTime = currentUpdateTime;
             //Update inputs;
-            quit = inputMan->updateState();
-            std::vector<playerAction> actions = mappMan->getActions(inputMan);
-            if( !stateMan->process(actions) )
+            if( inputMan->updateState() || !stateMan->process(processingElapsed) )
             {
                 quit = true;
+                break;
             }
+            iters += 1;
+        }
+        while(currentUpdateTime < lastUpdateTime + timeleft);
 
-            frameTime -= cStep;
-            t += cStep; //Current time period;
+        fps += 1;
+        if(currentUpdateTime - lastFpsTime >= 1000)
+        {
+            lastFpsTime = currentUpdateTime;
+            std::cout << "Fps: " << fps << std::endl;
+            fps = 0;
         }
 
         if(!stateMan->render())
@@ -160,6 +171,5 @@ int AppCore::loop()
             quit = true;
         }
     }
-
     return 0;
 }

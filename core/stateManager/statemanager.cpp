@@ -14,13 +14,13 @@ bool StateManager::render()
     return true;
 }
 
-bool StateManager::process(std::vector<playerAction> actions)
+bool StateManager::process(Uint32 ms)
 {
     if(stateStack.empty())
     {
         return false;
     }
-    stateStack.top()->processLogic(actions);
+    stateStack.top()->processLogic(ms);
     return true;
 }
 

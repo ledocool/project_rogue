@@ -1,19 +1,25 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include "stdafx.h"
+#include "etc/color.h"
+#include "graphics/sprite.h"
 
 class Tile
 {
 public:
     Tile();
-    Tile(Color clr);
-    Tile(short r, short g, short b);
-    void render(double x, double y);
+    Tile(Sprite *sprite, bool walkable, bool seethrough, bool interactable);
 
+    bool IsWalkable();
+    bool IsSeeThrough();
+    bool IsInteractable();
 
-public:
-    Color _color;
+    Sprite *getSprite();
+    bool interact();
+
+private:
+    Sprite *_sprite;
+    bool _walkable, _seethrough, _interactable;
 };
 
 #endif // TILE_H

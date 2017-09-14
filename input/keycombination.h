@@ -4,6 +4,8 @@
 
 using namespace keys;
 
+//Deprecated. Do not use until usage proves to be nesessary;
+
 class KeyCombination
 {
 public:

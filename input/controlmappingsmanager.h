@@ -12,10 +12,13 @@ class ControlMappingsManager
 {
 public:
     ControlMappingsManager();
-    std::vector <playerAction> getActions(InputManager *inputMan);
+    /*std::vector <playerAction> getActions(InputManager *inputMan);*/
+    keystroke getKey(playerAction a);
 
 private:
-    std::vector<KeyCombination> _keyCombinations;
+    /*void addCombination(KeyCombination kk, uint type);*/
+    /*std::vector<KeyCombination> _keyHeldCombinations, _keyPressedCombinations;*/
+    std::map<keys::playerAction, keys::keystroke> _keys;
 };
 
 #endif // CONTROLMAPPINGSMANAGER_H

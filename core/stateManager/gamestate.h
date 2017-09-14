@@ -13,7 +13,7 @@ public:
 protected:
     void render ();
     void enter ();
-    void processLogic(std::vector<keys::playerAction> actions);
+    void processLogic(Uint32 ms);
     void pause ();
     void resume ();
     void exit ();

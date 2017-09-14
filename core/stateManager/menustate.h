@@ -12,7 +12,7 @@ public:
 
 protected:
     void render ();
-    void processLogic(std::vector<playerAction> actions);
+    void processLogic(Uint32 ms);
     void enter ();
     void pause ();
     void resume ();
@@ -20,7 +20,8 @@ protected:
 
 private:
     std::vector <std::pair <int, std::string> > menuItems;
+    int highlightedItem;
+    bool keyUpPressed, keyDownPressed, keyLeftPressed, keyRightPressed, keyReturnPressed;
 };
-
 
 #endif // MENUSTATE_H

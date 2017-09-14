@@ -5,6 +5,7 @@ InputManager::InputManager()
     //maxKeys = 255; //No, srsly, can't be more;
     //keyStates.resize(256);
     _mouseStates.resize(5);
+    mappMan = Singleton<ControlMappingsManager>::get();
 }
 
 bool InputManager::keyIsUp(keystroke keyNum)
@@ -15,12 +16,22 @@ bool InputManager::keyIsUp(keystroke keyNum)
         return false;
 }
 
+bool InputManager::keyIsUp(playerAction action)
+{
+    return keyIsUp(mappMan->getKey(action));
+}
+
 bool InputManager::keyIsDown(keystroke keyNum)
 {
     if (_keyStates[keyNum] == KEY_IS_DOWN)
         return true;
     else
         return false;
+}
+
+bool InputManager::keyIsDown(playerAction action)
+{
+    return keyIsDown(mappMan->getKey(action));
 }
 
 bool InputManager::keyIsHeld(keystroke keyNum)
@@ -31,12 +42,22 @@ bool InputManager::keyIsHeld(keystroke keyNum)
         return false;
 }
 
+bool InputManager::keyIsHeld(playerAction action)
+{
+    return keyIsHeld(mappMan->getKey(action));
+}
+
 bool InputManager::keyIsToggled(keystroke keyNum)
 {
     if (_keyStates[keyNum] == KEY_IS_TOGGLED)
         return true;
     else
         return false;
+}
+
+uint InputManager::keyState(keystroke keyNum)
+{
+    return _keyStates[keyNum];
 }
 
 bool InputManager::mouseDown(mouseClick mouseKeyNum)
@@ -54,7 +75,6 @@ bool InputManager::updateState()
     SDL_Event event;
     std::vector < keystroke > keys;
     std::vector < mouseClick > clicks;
-    //std::vector <  >
 
     while ( SDL_PollEvent( &event ) )
     {
@@ -68,6 +88,7 @@ bool InputManager::updateState()
                 keys.push_back((keystroke)event.key.keysym.sym);
                 break;
             case SDL_KEYUP:
+
                 _keyStates[event.key.keysym.sym] = KEY_IS_UP;
                 keys.push_back((keystroke)event.key.keysym.sym);
                 break;

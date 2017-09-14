@@ -3,7 +3,13 @@
 
 MenuState::MenuState()
 {
-    menuItems.resize(2);
+    using namespace std;
+    menuItems.push_back(pair<int, string>(0, "Start"));
+    menuItems.push_back(pair<int, string>(0, "Options"));
+    menuItems.push_back(pair<int, string>(0, "Credits"));
+    menuItems.push_back(pair<int, string>(0, "Quit"));
+    highlightedItem = -1;
+    //keyPressed =
 }
 
 MenuState::~MenuState()
@@ -18,43 +24,58 @@ void MenuState::render()
     graphicMan->moveTo( 0., 0. );
     graphicMan->clear();
 
-    graphicMan->drawRect(2, 2, 5, 5, 0, 0, 0, 1);
-    graphicMan->drawRect(10, 10, 5, 5, 0, 0, 0, 1);
+    GLdouble height = 40.;
 
-    graphicMan->drawText(40, 50, "Start (q)");
-    graphicMan->drawText(40, 100, "Exit");
-
+    for(int i=0; i<menuItems.size(); i++)
+    {
+        if(i == highlightedItem)
+        {
+            graphicMan->drawText(40., height, menuItems[i].second, 0.6, 0.6, 0.6, 1.);
+        }else{
+            graphicMan->drawText(40., height, menuItems[i].second, 0., 0., 0., 1.);
+        }
+        height += 50;
+    }
 
     graphicMan->swapBuffers();
 }
 
-void MenuState::processLogic(std::vector<playerAction> actions)
+void MenuState::processLogic(Uint32 ms)
 {
-    for(uint i=0; i<actions.size(); i++)
+    if(inputMan->keyIsDown(keys::GO_UP))
     {
-        if(actions[i] == keys::CHANGE_STATE)
+        if(highlightedItem > 0) highlightedItem -= 1;
+        keyUpPressed = true;
+    }
+    if(inputMan->keyIsDown(keys::GO_DOWN))
+    {
+        if(highlightedItem < menuItems.size() - 1) highlightedItem += 1;
+        keyDownPressed = true;
+    }
+    if(inputMan->keyIsDown(keys::MENU_SELECT))
+    {
+        if(highlightedItem == 0)
         {
-            stateMan->pushState(new GameState());
+            stateMan->changeState(new GameState());
         }
+        keyReturnPressed = true;
     }
 }
 
 void MenuState::enter()
 {
+    highlightedItem = 0;
 }
 
 void MenuState::pause()
 {
-    //throw BasicException("Unable to resume state", errorCodes::stateError);//Exception("Unable to pause state", errorCodes::stateError);
 }
 
 void MenuState::resume()
 {
-    //throw BasicException("Unable to resume state", errorCodes::stateError);
 }
 
 void MenuState::exit()
 {
-    printf ("Imma exiting memu\n");
 }
 

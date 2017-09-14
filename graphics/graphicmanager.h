@@ -36,17 +36,16 @@ public:
     void drawSprite(Sprite *sp, GLfloat x, GLfloat y,
                     GLfloat scale, GLfloat rotation);
 
-    void drawText(GLfloat xSt, GLfloat ySt, std::string text);
-
     void swapBuffers();
     void clear();
 
+    void drawText(GLfloat xSt, GLfloat ySt, std::string text, GLdouble r, GLdouble g, GLdouble b, GLdouble a);
 protected:
     //Buffer swap
     //void readyfont();
 private:
     //window micro
-    bool makeWindow(const char *title, unsigned int x, unsigned int y, unsigned int height, unsigned int width);
+    bool makeWindow(const char *title, const unsigned int x, const unsigned int y, const unsigned int height, const unsigned int width);
     void destroyWindow();
 
     //Draw inits
@@ -57,10 +56,13 @@ private:
     void initGL(unsigned int h, unsigned int w);
     void freeGL();
 
+    void initFonts();
+    void freeFonts();
 
     SDL_Window *_mainWindow;
     SDL_GLContext _glcontext;
-    GLuint _currentSprite, _font;
+    GLuint _currentSprite;
+    FTBufferFont *_font;
 };
 
 #endif // GRAPHICMANAGER_H

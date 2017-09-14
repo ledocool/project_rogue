@@ -2,6 +2,8 @@
 #define SPRITE_H
 
 #include "stdafx.h"
+#include "etc/singleton.h"
+#include "graphics/spritemanager.h"
 
 class Sprite
 {

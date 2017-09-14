@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "graphics/sprite.h"
 
+class Sprite;
+
 class SpriteManager// : public singleton <spriteManager>
 {
 public:

@@ -1,12 +1,14 @@
 #include "gamestate.h"
 #include <sstream>
+#include "game/entity.h"
+#include "game/tile.h"
 
 GameState::GameState()
 {
     mapX = 0;
     mapY = 0;
-    mapW = 12;
-    mapH = 12;
+    mapW = 20;
+    mapH = 20;
 }
 
 GameState::~GameState()
@@ -56,30 +58,46 @@ void GameState::render()
     cutsizeX = startingTileX + endTileX > mSizeX ? mSizeX - startingTileX : cutsizeX;
     cutsizeY = startingTileY + endTileY > mSizeY ? mSizeY - startingTileY : cutsizeY;
 
-    std::vector<Tile> tiles = _map.getRenderingSquare(  startingTileX,
-                                                        startingTileY,
-                                                        cutsizeX,
-                                                        cutsizeY );
+    std::vector<Tile> tiles = _map.getRenderingSquare(startingTileX, startingTileY, cutsizeX, cutsizeY);
+    std::vector<Entity> entities = _map.getEntities(-(cameraMan->getX()), -(cameraMan->getY()),
+                                                    -(cameraMan->getX()) + screenWidth, -(cameraMan->getY()) + screenHeight);
 
-    int tilesize = tiles.size();
-    uint y, x;
+    int tilesize = tiles.size(), entitysize = entities.size();
     GLfloat offsetX, offsetY;
 
+    //todo: iterator here
     for(int i=0; i<tilesize; i++)
     {
-        y = i/cutsizeX,
-        x = i%cutsizeX;
+        uint
+            y = i/cutsizeX,
+            x = i%cutsizeX;
         offsetX = startingTileX * rectWidth;
         offsetY = startingTileY * rectHeight;
 
-        graphicMan->drawRect(offsetX + rectWidth * x,
-                             offsetY + rectHeight * y,
-                             rectWidth,
-                             rectHeight,
-                             tiles[i]._color.r,
-                             tiles[i]._color.g,
-                             tiles[i]._color.b,
-                             1.0, 1);
+//        graphicMan->drawRect(offsetX + rectWidth * x,
+//                             offsetY + rectHeight * y,
+//                             rectWidth,
+//                             rectHeight,
+//                             tiles[i]._color.r,
+//                             tiles[i]._color.g,
+//                             tiles[i]._color.b,
+//                             1.0, 1);
+
+            graphicMan->drawSprite(tiles[i].getSprite(),
+                                   offsetX + rectWidth * x,
+                                   offsetY + rectHeight * y,
+                                   1.0, 0.);
+    }
+
+    //todo: iterator here
+    for(int i=0; i<entitysize; i++)
+    {
+        graphicMan->drawCircle(entities[i]._x, entities[i]._y,
+                               10,
+                               entities[i]._color.r,
+                               entities[i]._color.g,
+                               entities[i]._color.b,
+                               1.0, 1);
     }
 
     graphicMan->swapBuffers();
@@ -88,28 +106,34 @@ void GameState::render()
 void GameState::enter()
 {
     _map = Map(mapW, mapH);
+
+    Entity *p1, *p2, *p3;
+    p1 = new Entity(255, 0, 0, 100, 200);
+    p2 = new Entity(0, 255, 0, 20, 20);
+    p3 = new Entity(0, 0, 255, 20, 200);
+
+    _map.addEntity(p1);
+    _map.addEntity(p2);
+    _map.addEntity(p3);
 }
 
-void GameState::processLogic(std::vector<playerAction> actions)
+void GameState::processLogic(Uint32 ms)
 {
     //todo: Apply changes to game state and map;
     float addY = 0, addX = 0;
-    for(uint i=0; i<actions.size(); i++)
-    {
-        if(actions[i] == keys::GO_UP)
-            addY = -0.5;
-        if(actions[i] == keys::GO_DOWN)
-            addY = +0.5;
-        if(actions[i] == keys::GO_LEFT)
-            addX = +0.5;
-        if(actions[i] == keys::GO_RIGHT)
-            addX = -0.5;
-        if(actions[i] == keys::ZOOM_IN)
-            cameraMan->setZoom(cameraMan->getZoom() + 0.001);
-        if(actions[i] == keys::ZOOM_OUT)
-            cameraMan->setZoom(cameraMan->getZoom() - 0.001);
 
-    }
+    if(inputMan->keyIsHeld(keys::GO_UP))
+        addY = -0.5 * ms;
+    if(inputMan->keyIsHeld(keys::GO_DOWN))
+        addY = +0.5 * ms;
+    if(inputMan->keyIsHeld(keys::GO_LEFT))
+        addX = +0.5 * ms;
+    if(inputMan->keyIsHeld(keys::GO_RIGHT))
+        addX = -0.5 * ms;
+    if(inputMan->keyIsHeld(keys::ZOOM_IN))
+        cameraMan->setZoom(cameraMan->getZoom() + 0.01);
+    if(inputMan->keyIsHeld(keys::ZOOM_OUT))
+        cameraMan->setZoom(cameraMan->getZoom() - 0.01);
 
     cameraMan->move(addX, addY);
 }

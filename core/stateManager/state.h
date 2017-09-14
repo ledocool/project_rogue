@@ -20,7 +20,7 @@ public:
 
 protected:
     virtual void render () = 0; //Render object
-    virtual void processLogic (std::vector<keys::playerAction> actions) = 0;
+    virtual void processLogic (Uint32 elapsed) = 0;
     virtual void enter () = 0; //Enter a state;
     virtual void pause () = 0; //Pause a state;
     virtual void resume () = 0;

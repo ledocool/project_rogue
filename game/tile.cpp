@@ -1,22 +1,39 @@
 #include "tile.h"
 
-Tile::Tile(){
+Tile::Tile()
+{
 
 }
 
-Tile::Tile(Color c)
+Tile::Tile(Sprite *sprite, bool walkable, bool seethrough, bool interactable)
 {
-    _color = c;
+    _sprite = sprite;
+    _walkable = walkable;
+    _interactable = seethrough;
+    _seethrough = interactable;
 }
 
-Tile::Tile(short r, short g, short b)
+bool Tile::IsWalkable()
 {
-    _color.b = b;
-    _color.g = g;
-    _color.r = r;
+    return _walkable;
 }
 
-void Tile::render(double x, double y)
+bool Tile::IsSeeThrough()
 {
+    return _seethrough;
+}
 
+bool Tile::IsInteractable()
+{
+    return _interactable;
+}
+
+Sprite *Tile::getSprite()
+{
+    return _sprite;
+}
+
+bool Tile::interact()
+{
+    return false;
 }
