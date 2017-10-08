@@ -129,7 +129,7 @@ int AppCore::loop()
 {    
     Uint32 dt = 16;
     Uint32 frameTime, lastUpdateTime, currentUpdateTime = SDL_GetTicks(), lastFpsTime, lastProcessingTime, processingElapsed;
-    Uint32 fps = 0;
+    //Uint32 fps = 0;
     bool quit = false;
 
     lastProcessingTime = lastFpsTime = lastUpdateTime = currentUpdateTime;
@@ -158,13 +158,13 @@ int AppCore::loop()
         }
         while(currentUpdateTime < lastUpdateTime + timeleft);
 
-        fps += 1;
-        if(currentUpdateTime - lastFpsTime >= 1000)
-        {
-            lastFpsTime = currentUpdateTime;
-            std::cout << "Fps: " << fps << std::endl;
-            fps = 0;
-        }
+//        fps += 1;
+//        if(currentUpdateTime - lastFpsTime >= 1000)
+//        {
+//            lastFpsTime = currentUpdateTime;
+//            std::cout << "Fps: " << fps << std::endl;
+//            fps = 0;
+//        }
 
         if(!stateMan->render())
         {

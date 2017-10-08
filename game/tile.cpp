@@ -37,3 +37,8 @@ bool Tile::interact()
 {
     return false;
 }
+
+Tile Tile::copy()
+{
+    return Tile(_sprite, _walkable, _seethrough, _interactable);
+}

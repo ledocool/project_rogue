@@ -57,7 +57,8 @@ SOURCES += main.cpp \
     game/interface/buttonbase.cpp \
     etc/color.cpp \
     game/entity.cpp \
-    core/stateManager/loading.cpp
+    core/stateManager/loading.cpp \
+    game/character.cpp
 
 HEADERS += \
     core/appcore.h \
@@ -88,7 +89,8 @@ HEADERS += \
     etc/color.h \
     my_classes.h \
     game/entity.h \
-    core/stateManager/loading.h
+    core/stateManager/loading.h \
+    game/character.h
 
 OTHER_FILES += \
     todo.txt
@@ -99,4 +101,5 @@ DISTFILES += \
     resources/strings.ini \
     resources/courier.ttf \
     resources/tiles/floor.png \
-    resources/tiles/wall.png
+    resources/tiles/wall.png \
+    resources/entities/characters/bot_green.png

@@ -195,16 +195,16 @@ void GraphicManager::drawSprite(Sprite *sp, GLfloat x, GLfloat y, GLfloat scale,
 
         glColor4f(1.0, 1.0, 1.0, 1.0);
 
-        glTexCoord2f (0., 1.);
+        glTexCoord2f (0., 0.);
         glVertex2f (0, height*scale);
 
-        glTexCoord2f (1., 1.);
+        glTexCoord2f (1., 0.);
         glVertex2f (width*scale, height*scale);
 
-        glTexCoord2f (1., 0.);
+        glTexCoord2f (1., 1.);
         glVertex2f (width*scale, 0);
 
-        glTexCoord2f (0., 0.);
+        glTexCoord2f (0., 1.);\
         glVertex2f (0, 0);
 
     glEnd();
@@ -325,6 +325,7 @@ void GraphicManager::initGL(unsigned int h, unsigned int w)
     glDisable(GL_LIGHTING);
 
     glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_TEXTURE_2D);
 
     glShadeModel( GL_SMOOTH );

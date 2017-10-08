@@ -1,7 +1,7 @@
-1. Console class for handling console messages and logging them later.
+DONE! 1. Console class for handling console messages and logging them later.
 2. Make debugging console
-3. Map class.
-4. Game logic class.
+DONE! 3. Map class.
+DONE! (Gamestate that is) 4. Game logic class.
 
 Sound:
     1. Make sdl load all type of sound formats.
@@ -9,10 +9,8 @@ Sound:
 Input:
     1. Make confings human-readable. (std::map container with <string, keystroke> pairs)
 
-Remove processes as they are not currently used with this engine architechture.
-
-
 Game:
-1. Make a basic test map and display it on screen.
+DONE! 1. Make a basic test map and display it on screen.
 2. Create basic interface for the game.
-3. Create a character entity and tie it to controls.
+DONE! 3. Create a character entity and tie it to controls.
+4. Make sane logic for moving. Add tests for walkability. Distiction between walls and floors.

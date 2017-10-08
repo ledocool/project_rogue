@@ -17,6 +17,7 @@ public:
     std::vector <Tile> getRenderingSquare(uint x, uint y, uint width, uint height);
     std::vector <Entity> getEntities(int x, int y, int xEd, int yEd);
     void getMapSize(uint *w, uint *h);
+    Entity* getPlayer();
     bool addEntity(Entity *e);
 
 private:
@@ -37,7 +38,7 @@ private:
 
     uint _width, _height; //Width and height o map in squares;
     std::vector < Tile > _playfield; //Substitute for map
-    std::vector < Entity* > _entities; //Players, mobs, trees and items;
+    std::vector < Entity * > _entities; //Players, mobs, trees and items;
     Entity* _playerEntity;
 };
 

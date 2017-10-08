@@ -18,13 +18,13 @@ Map::Map(uint w, uint h)
 
 Map::~Map()
 {
-    uint entitySize = _entities.size();
+    //uint entitySize = _entities.size();
     //remove all entities;
     //todo: iterator;
-    for(uint i=0; i < entitySize; i++)
-    {
-        delete _entities[i];
-    }
+//    for(uint i=0; i < entitySize; i++)
+//    {
+//        delete _entities[i];
+//    }
 }
 
 void Map::generate(uint w __attribute__((unused)), uint h __attribute__((unused)), uint seed __attribute__((unused)) = 0 )
@@ -48,6 +48,10 @@ void Map::generate(uint w __attribute__((unused)), uint h __attribute__((unused)
             }
         }
     }
+
+    Entity *bot = new Entity(new Sprite("./entities/characters/bot_green.png"), 40., 40.);
+    _entities.push_back(bot);
+    _playerEntity = bot;
 }
 
 void Map::clear()
@@ -96,8 +100,10 @@ std::vector<Entity> Map::getEntities(int x, int y, int xEd, int yEd)
     result.reserve(entityAmount);
     for(int i=0; i<entityAmount; i++)
     {
-        if(_entities[i]->_x <= xEd && _entities[i]->_x >= x
-                && _entities[i]->_y <= yEd && _entities[i]->_y >= y )
+        float entityX, entityY;
+        _entities[i]->getCoordinates(&entityX, &entityY);
+        if(entityX <= xEd && entityX >= x
+                && entityY <= yEd && entityY >= y )
         {
             result.push_back(_entities[i]->copy());
         }
@@ -112,7 +118,12 @@ void Map::getMapSize(uint *w, uint *h)
     *h = _height;
 }
 
-bool Map::addEntity(Entity* e)
+Entity *Map::getPlayer()
+{
+    return _playerEntity;
+}
+
+bool Map::addEntity(Entity * e)
 {
     _entities.push_back(e);
 }

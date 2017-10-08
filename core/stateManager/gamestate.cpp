@@ -18,6 +18,8 @@ GameState::~GameState()
 
 void GameState::render()
 {
+    int screenWidth, screenHeight;
+    graphicMan->getSize(&screenWidth, &screenHeight);
     graphicMan->resetMatrix(); //draw in screens coordinates;
     graphicMan->clear();
     graphicMan->moveTo(cameraMan->getX(),
@@ -25,10 +27,7 @@ void GameState::render()
 
     uint mw, mh;
     _map.getMapSize(&mw, &mh);
-    int screenWidth, screenHeight;
-    graphicMan->getSize(&screenWidth, &screenHeight);
-
-    uint /*mOffsetX=0,
+    int /*mOffsetX=0,
          mOffsetY=0,*/
          mSizeX=mapW,
          mSizeY=mapH; //x,y,width,height
@@ -73,31 +72,20 @@ void GameState::render()
             x = i%cutsizeX;
         offsetX = startingTileX * rectWidth;
         offsetY = startingTileY * rectHeight;
-
-//        graphicMan->drawRect(offsetX + rectWidth * x,
-//                             offsetY + rectHeight * y,
-//                             rectWidth,
-//                             rectHeight,
-//                             tiles[i]._color.r,
-//                             tiles[i]._color.g,
-//                             tiles[i]._color.b,
-//                             1.0, 1);
-
-            graphicMan->drawSprite(tiles[i].getSprite(),
-                                   offsetX + rectWidth * x,
-                                   offsetY + rectHeight * y,
-                                   1.0, 0.);
+        graphicMan->drawSprite(tiles[i].getSprite(),
+                               offsetX + rectWidth * x,
+                               offsetY + rectHeight * y,
+                               1.0, 0.);
     }
 
     //todo: iterator here
     for(int i=0; i<entitysize; i++)
     {
-        graphicMan->drawCircle(entities[i]._x, entities[i]._y,
-                               10,
-                               entities[i]._color.r,
-                               entities[i]._color.g,
-                               entities[i]._color.b,
-                               1.0, 1);
+        float x, y;
+        Sprite *spt;
+        entities[i].getCoordinates(&x, &y);
+        spt = entities[i].getSprite();
+        graphicMan->drawSprite(spt, x, y, 1., 0.);
     }
 
     graphicMan->swapBuffers();
@@ -106,36 +94,39 @@ void GameState::render()
 void GameState::enter()
 {
     _map = Map(mapW, mapH);
-
-    Entity *p1, *p2, *p3;
-    p1 = new Entity(255, 0, 0, 100, 200);
-    p2 = new Entity(0, 255, 0, 20, 20);
-    p3 = new Entity(0, 0, 255, 20, 200);
-
-    _map.addEntity(p1);
-    _map.addEntity(p2);
-    _map.addEntity(p3);
+    //todo: create player entity;
+    //todo: populate map with entities;
 }
 
 void GameState::processLogic(Uint32 ms)
 {
+    int screenWidth, screenHeight;
+    graphicMan->getSize(&screenWidth, &screenHeight);
     //todo: Apply changes to game state and map;
     float addY = 0, addX = 0;
 
-    if(inputMan->keyIsHeld(keys::GO_UP))
-        addY = -0.5 * ms;
-    if(inputMan->keyIsHeld(keys::GO_DOWN))
-        addY = +0.5 * ms;
-    if(inputMan->keyIsHeld(keys::GO_LEFT))
-        addX = +0.5 * ms;
-    if(inputMan->keyIsHeld(keys::GO_RIGHT))
-        addX = -0.5 * ms;
+    Entity *player =_map.getPlayer();
+
+    if(inputMan->keyIsDown(keys::GO_UP))
+        player->move(0, 40);
+        //addY = -0.5 * ms;
+    if(inputMan->keyIsDown(keys::GO_DOWN))
+        player->move(0, -40);
+        //addY = +0.5 * ms;
+    if(inputMan->keyIsDown(keys::GO_LEFT))
+        player->move(-40, 0);
+        //addX = +0.5 * ms;
+    if(inputMan->keyIsDown(keys::GO_RIGHT))
+        player->move(40, 0);
+        //addX = -0.5 * ms;
     if(inputMan->keyIsHeld(keys::ZOOM_IN))
         cameraMan->setZoom(cameraMan->getZoom() + 0.01);
     if(inputMan->keyIsHeld(keys::ZOOM_OUT))
         cameraMan->setZoom(cameraMan->getZoom() - 0.01);
 
-    cameraMan->move(addX, addY);
+    player->getCoordinates(&addX, &addY);
+    cameraMan->set(-addX + screenWidth/2, -addY + screenHeight/2);
+    //std::cout << "Man: " << addX << " " << addY << " Camera: " << addX*40 << " " << addY*40 << std::endl;
 }
 
 void GameState::pause()

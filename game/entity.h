@@ -2,18 +2,22 @@
 #define ENTITY_H
 
 #include "etc/color.h"
+#include "graphics/sprite.h"
 
 class Entity
 {
 public:
     Entity();
-    Entity(short r, short g, short b, float x = 0., float y = 0.);
-    void getCoordinates(float *x, float *y);
-    Entity copy();
+    Entity(Sprite *spt, float x = 0., float y = 0.);
+    virtual Entity copy();
+    virtual Sprite *getSprite();
+    virtual void setCoordinates(float x, float y);
+    virtual void getCoordinates(float *x, float *y);
+    virtual void move(float x, float y);
 
-public:
-    Color _color;
+protected:
     float _x, _y;
+    Sprite *_sprite;
 };
 
 #endif // ENTITY_H

@@ -17,6 +17,8 @@ public:
     Sprite *getSprite();
     bool interact();
 
+    Tile copy();
+
 private:
     Sprite *_sprite;
     bool _walkable, _seethrough, _interactable;
